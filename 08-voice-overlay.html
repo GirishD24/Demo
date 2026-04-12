@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M8 — Voice overlay · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab tab-active">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Conversation</h1>
+        <p class="page-subtitle">Session focus: Ms. Fatima Rahman, CICU bed 1</p>
+      </div>
+    </div>
+    <div class="card" style="height: 200px; opacity: 0.4;"></div>
+    <div class="card" style="height: 120px; opacity: 0.4;"></div>
+  </main>
+
+  <!-- VOICE OVERLAY -->
+  <!-- Info card explaining the overlay -->
+  <div style="position:fixed; top:24px; left:24px; z-index:210; background:#1a1a2e; color:white; padding:20px 24px; border-radius:12px; max-width:340px; box-shadow:0 8px 32px rgba(0,0,0,0.4); font-family:'Inter',sans-serif;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <span style="width:24px; height:24px; border-radius:50%; background:#00796B; color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;">i</span>
+      <span style="font-size:14px; font-weight:700; color:#4DB6AC;">Voice overlay</span>
+    </div>
+    <div style="font-size:13px; color:#F5F5F5; line-height:1.5;">
+      This is what you see while holding the mic button. Your words appear in real time.
+      When you mention a different patient, OmniSense confirms the switch before acting.
+      Release the button to submit your question.
+    </div>
+  </div>
+
+  <div class="voice-overlay">
+    <div class="voice-card">
+
+      <div class="voice-status">Listening &middot; press and hold</div>
+
+      <button class="mic-fab mic-fab-large mic-listening" title="Release to submit">
+        <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg>
+      </button>
+
+      <div class="waveform">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+
+      <div class="voice-transcript">
+        &ldquo;Pull up Mrs. Nair&rsquo;s milrinone weaning plan and her last echo<span class="typing"></span>&rdquo;
+      </div>
+
+      <!-- Patient confirmation pill (mandatory on first mention) -->
+      <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:var(--color-acknowledged-bg); border:1px solid var(--color-acknowledged-border); border-radius:var(--radius-full); font-size:var(--font-sm); color:var(--color-acknowledged); width:fit-content;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        Switching focus to <strong>&nbsp;Mrs. Latha Nair, 58F &middot; CICU bed 8</strong>
+      </div>
+
+      <div style="font-size:var(--font-xs); color:var(--color-text-muted); text-align:center; max-width:380px; line-height:1.5;">
+        Release the mic to submit. Your previous focus (Ms. Fatima) will move to history &mdash; pronouns in your
+        next turn will resolve to <strong>Mrs. Nair</strong>.
+      </div>
+
+      <div class="voice-actions">
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-primary">Release to send</button>
+      </div>
+
+      <div style="margin-top:var(--space-sm); display:flex; gap:var(--space-md); font-size:var(--font-xs); color:var(--color-text-muted);">
+        <span>STT: browser &middot; en-IN</span>
+        <span>&bull;</span>
+        <span>Audit ID vc_20260411_0704</span>
+        <span>&bull;</span>
+        <span>Latency 0.4&thinsp;s</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'What you see while speaking. Live transcription, patient confirmation, then release to send.'
+};
+// No spotlight steps — this page is a full-screen overlay, spotlight would clash
+var TOUR_STEPS = [];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

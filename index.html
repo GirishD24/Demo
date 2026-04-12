@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OmniSense Clinical · Aster Demo Mockups</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity demo &middot; UI mockups</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Mockup review</span>
+        <span class="user-meta">Static HTML &middot; no backend</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Aster Medcity demo &mdash; UI mockups</h1>
+        <p class="page-subtitle">
+          10 UI mockups for the OmniSense Clinical demo at Aster Medcity Kochi.
+        </p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-lg);">
+      <div style="font-size: var(--font-xs); text-transform: uppercase; letter-spacing: 0.8px; color: var(--color-primary); font-weight: 700; margin-bottom: 6px;">Premise</div>
+      <p style="line-height: 1.6;">
+        Dr. Rajesh Menon walks into CICU at 7&thinsp;AM, taps the mic on the Briefing tab, asks
+        <em>&ldquo;How does my day look?&rdquo;</em> &mdash; OmniSense reads back a 60-90&thinsp;second narrative
+        across his 11 cardiology patients, with priority ranking, overnight changes, and the questions
+        waiting for him this morning. He follows up with <em>&ldquo;Tell me more about Ms. Fatima&rdquo;</em>
+        &rarr; drill-down briefing with a patient confirmation step. Hands-free, fully cited, fully
+        audited.
+      </p>
+      <div style="margin-top: var(--space-md); display: flex; gap: 6px; flex-wrap: wrap;">
+        <span class="badge badge-outline">Voice doctor-only</span>
+        <span class="badge badge-outline">Push-to-talk</span>
+        <span class="badge badge-outline">Peer-consult tone</span>
+        <span class="badge badge-outline">Every reply cited</span>
+        <span class="badge badge-outline">Drug-safety pipeline</span>
+        <span class="badge badge-outline">PHI on-prem (production)</span>
+      </div>
+    </div>
+
+    <h2 style="font-size: var(--font-xl); font-weight: 600; margin: var(--space-xl) 0 var(--space-md);">
+      Mockups
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: var(--space-md);">
+
+      <a href="01-briefing-landing.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M1</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Briefing tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Empty landing &middot; mic prompt</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Doctor lands on the Briefing tab for the first time today. Big mic, friendly prompt,
+          patient counts, sample questions.
+        </div>
+      </a>
+
+      <a href="02-briefing-shift-start.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M2</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Briefing tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Shift-start briefing</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          After &ldquo;How does my day look?&rdquo; &mdash; AI narrative bubble, 5 priority patient cards, 6
+          stable patients in a compact list. The demo opener.
+        </div>
+      </a>
+
+      <a href="03-briefing-drilldown.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M3</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Briefing tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Drill-down &middot; Ms. Fatima</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          After &ldquo;Tell me more about Ms. Fatima&rdquo; &mdash; conversation history, patient confirmation
+          pill, single-patient narrative, vitals tiles, follow-up prompt.
+        </div>
+      </a>
+
+      <a href="08-voice-overlay.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M8</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Voice overlay</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Voice interaction overlay</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          What you see while pressing the mic. Live transcription, patient confirmation pill, release to submit.
+        </div>
+      </a>
+
+      <a href="11-patients-tab.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M11</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Patients tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">All 11 patients &middot; trajectory cards</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Card grid with trajectory indicators (declining / stable / improving), alert badges, filter and sort controls. Tap a card to open the patient drawer.
+        </div>
+      </a>
+
+      <a href="04-patient-drawer-pillai.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M4</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Patient drawer &middot; Body</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Mr. Pillai &middot; LAD post-stent + AKI</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Coronary tree schematic with DES marker. Bilateral renal coronal section. Drug-safety hold list.
+        </div>
+      </a>
+
+      <a href="05-patient-drawer-fatima.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M5</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Patient drawer &middot; Body</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Ms. Fatima &middot; myocarditis + ECMO</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Heart with global hypokinesia overlay + RV strain. ECMO decision panel. Multi-discipline
+          contact list. The crashing-patient demo moment.
+        </div>
+      </a>
+
+      <a href="06-patient-drawer-rao.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M6</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Patient drawer &middot; Body</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Mr. Rao &middot; pre-op CABG x3</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Heart with 3-vessel disease overlay + mild AS marker on the aortic valve. Hold-medication
+          checklist. Anaesthesia flag tiles. Draft pre-op clearance.
+        </div>
+      </a>
+
+      <a href="09-journey-pillai.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M9</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Patient drawer &middot; Journey</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Mr. Pillai &middot; clickable timeline + lab popup</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Event stream grouped by day, filter chips, search, overnight changes banner, inline trend sparklines, lab popup modal with AI interpretation + PACS stub.
+        </div>
+      </a>
+
+      <a href="07-rounds-tab-fallback.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M7</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Rounds tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">I-PASS handoff + action queue</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Text-based shift handoff with read-only action queue. Used at a desk or when voice is not available.
+        </div>
+      </a>
+
+      <a href="10-knowledge-tab.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge badge-primary">M10</span>
+          <span style="font-size: var(--font-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Knowledge tab</span>
+        </div>
+        <div style="font-size: var(--font-lg); font-weight: 600;">Clinical RAG lookup</div>
+        <div style="font-size: var(--font-sm); color: var(--color-text-secondary);">
+          Evidence-based search with patient context. Scope filters, AI answer with confidence bar, cited sources, recent queries.
+        </div>
+      </a>
+
+    </div>
+
+    <h2 style="font-size: var(--font-xl); font-weight: 600; margin: var(--space-2xl) 0 var(--space-md);">
+      Demo cast &middot; 5 cardiology patients
+    </h2>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <table style="width: 100%; border-collapse: collapse; font-size: var(--font-sm);">
+        <thead style="background: var(--color-bg);">
+          <tr>
+            <th style="text-align: left; padding: var(--space-md); border-bottom: 1px solid var(--color-border); font-size: var(--font-xs); text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.5px;">Patient</th>
+            <th style="text-align: left; padding: var(--space-md); border-bottom: 1px solid var(--color-border); font-size: var(--font-xs); text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.5px;">Bed</th>
+            <th style="text-align: left; padding: var(--space-md); border-bottom: 1px solid var(--color-border); font-size: var(--font-xs); text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.5px;">Setting</th>
+            <th style="text-align: left; padding: var(--space-md); border-bottom: 1px solid var(--color-border); font-size: var(--font-xs); text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 0.5px;">Demo angle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);"><strong>Mr. Sasi Pillai, 62M</strong></td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">CICU 12</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">Post-PCI STEMI day 2 + AKI</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light); color: var(--color-text-secondary);">Drug safety + cardio &harr; nephro reasoning. The &ldquo;watch the kidneys, hold the metformin&rdquo; moment.</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);"><strong>Mrs. Latha Nair, 58F</strong></td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">CICU 8</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">Decomp HFrEF on milrinone</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light); color: var(--color-text-secondary);">Inotrope wean + LVAD/transplant decision. The &ldquo;recovering but needs the next big call&rdquo; moment.</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);"><strong>Mr. Hari Krishnan, 71M</strong></td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">CICU 3</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">NSTEMI awaiting cath, CKD 3</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light); color: var(--color-text-secondary);">Pre-procedure risk strat + minimising contrast load. The deteriorating-risk-before-planned-procedure angle.</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);"><strong>Ms. Fatima Rahman, 28F</strong> &#x26A1;</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">CICU 1</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light);">Acute viral myocarditis + ECMO decision</td>
+            <td style="padding: var(--space-md); border-bottom: 1px solid var(--color-border-light); color: var(--color-text-secondary);">The young-patient-crashing-in-front-of-you moment. Multi-discipline + time pressure.</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-md);"><strong>Mr. Venu Rao, 68M</strong> &#x1F52A;</td>
+            <td style="padding: var(--space-md);">SD-4</td>
+            <td style="padding: var(--space-md);">Pre-op CABG x3 tomorrow</td>
+            <td style="padding: var(--space-md); color: var(--color-text-secondary);">Planned-care peer consult: DAPT hold timing, ACE-i + metformin hold, written sign-off to anaesthesia.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </main>
+</div>
+<script>
+// Redirect to welcome page (the entry point)
+location.href = 'welcome.html';
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

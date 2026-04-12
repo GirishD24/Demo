@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M1 — Briefing landing · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab tab-active">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Good morning, Dr. Menon</h1>
+        <p class="page-subtitle">Sunday, 11 April 2026 · 06:58 · Shift handover from Dr. Anand · 11 patients on your list today</p>
+      </div>
+      <div style="display:flex; gap:var(--space-sm);">
+        <button class="btn btn-secondary btn-sm">Switch shift</button>
+        <button class="btn btn-secondary btn-sm">View on-call</button>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex; align-items:center; gap:var(--space-lg); padding:var(--space-xl);">
+      <div style="flex:1;">
+        <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:1px; color:var(--color-primary); font-weight:700; margin-bottom:6px;">Voice briefing</div>
+        <h2 style="font-size:var(--font-xl); font-weight:600; margin-bottom:8px;">Tap to start your shift briefing</h2>
+        <p style="color:var(--color-text-secondary); max-width:520px;">
+          Press and hold the microphone, then ask <em>&ldquo;How does my day look?&rdquo;</em>
+          I&rsquo;ll walk you through your 11 patients in priority order, tell you what changed overnight,
+          and surface anything that needs your attention this morning.
+        </p>
+        <div style="margin-top:var(--space-md); display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="badge badge-outline">Hands-free</span>
+          <span class="badge badge-outline">Doctor-only</span>
+          <span class="badge badge-outline">Cited responses</span>
+          <span class="badge badge-outline">English</span>
+        </div>
+      </div>
+      <button class="mic-fab mic-fab-large" title="Press and hold to talk">
+        <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg>
+      </button>
+    </div>
+
+    <div id="triage-counts" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:var(--space-md); margin-top:var(--space-md);">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:var(--font-3xl); font-weight:700; color:var(--color-primary-dark);">11</div>
+        <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">Patients on your list</div>
+      </div>
+      <div class="card" style="text-align:center; background:var(--color-warning-bg); border-color:var(--color-warning-border);">
+        <div style="font-size:var(--font-3xl); font-weight:700; color:var(--color-warning);">5</div>
+        <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">Need your attention</div>
+      </div>
+      <div class="card" style="text-align:center; background:var(--color-stable-bg); border-color:var(--color-stable-border);">
+        <div style="font-size:var(--font-3xl); font-weight:700; color:var(--color-stable);">6</div>
+        <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">Stable overnight</div>
+      </div>
+    </div>
+
+    <div id="sample-prompts" style="margin-top:var(--space-lg);">
+      <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-text-muted); font-weight:600; margin-bottom:var(--space-sm);">
+        Try asking
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="doctor-bubble" style="margin:0;"><div class="doctor-bubble-icon">RM</div><div class="doctor-bubble-text">&ldquo;How does my day look?&rdquo;</div></div>
+        <div class="doctor-bubble" style="margin:0;"><div class="doctor-bubble-icon">RM</div><div class="doctor-bubble-text">&ldquo;Tell me more about Ms. Fatima.&rdquo;</div></div>
+        <div class="doctor-bubble" style="margin:0;"><div class="doctor-bubble-icon">RM</div><div class="doctor-bubble-text">&ldquo;What&rsquo;s pending for the CABG case tomorrow?&rdquo;</div></div>
+        <div class="doctor-bubble" style="margin:0;"><div class="doctor-bubble-icon">RM</div><div class="doctor-bubble-text">&ldquo;Any troponin trends I should worry about?&rdquo;</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--space-lg); padding:var(--space-md); background:var(--color-info-bg); border-radius:var(--radius-md); font-size:var(--font-xs); color:var(--color-text-secondary); text-align:center;">
+      Voice routes through your browser for this demo. In production / pilot, audio stays on-prem
+      (whisper.cpp + Piper TTS) — no PHI leaves the hospital network. Every interaction is audited.
+    </div>
+
+  </main>
+</div>
+<script>
+// Tour page config
+var TOUR_CONFIG = {
+  pageDesc: 'Dr. Menon opens OmniSense at 7 AM. This is what they see first.'
+};
+
+// Spotlight steps — each highlights one element and tells the story
+var TOUR_STEPS = [
+  {
+    target: '.tabbar',
+    title: 'Your tabs',
+    body: '<strong>Briefing</strong> is where you start your shift, using voice. <strong>Rounds</strong> gives you the same information as text. <strong>Patients</strong> shows individual patient cards. <strong>Knowledge</strong> is your clinical reference library.',
+    position: 'bottom'
+  },
+  {
+    target: '.mic-fab-large',
+    title: 'Talk to OmniSense',
+    body: 'Press and hold, then speak naturally — <em>"How does my day look?"</em> Release when you\'re done. OmniSense only listens while you hold the button.',
+    position: 'left'
+  },
+  {
+    target: '.page-title',
+    title: 'Your shift at a glance',
+    body: 'You see your name, the date, who handed over to you, and how many patients are on your list today.',
+    position: 'bottom'
+  },
+  {
+    target: '#triage-counts',
+    title: 'How busy is your morning?',
+    body: '<strong>5 patients need attention</strong>, 6 are stable overnight. You know the shape of your shift before you say a word.',
+    position: 'top'
+  },
+  {
+    target: '#sample-prompts',
+    title: 'What can you ask?',
+    body: 'Try any of these — or ask your own question. <strong>"How does my day look?"</strong> gives you the full shift briefing across all your patients.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rounds · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+<style>
+  .rounds-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .rounds-stat {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    text-align: center;
+  }
+  .rounds-stat-num {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .rounds-stat-label {
+    font-size: var(--font-xs);
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  .round-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 14px var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    transition: all 150ms ease;
+  }
+  .round-row:hover { box-shadow: var(--shadow-md); }
+  .round-row-seen { border-left: 5px solid var(--color-stable); }
+  .round-row-pending { border-left: 5px solid var(--color-warning); }
+  .round-row-urgent { border-left: 5px solid var(--color-critical); }
+
+  .round-bed {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    width: 50px;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .round-info { flex: 1; min-width: 0; }
+  .round-name { font-weight: 600; color: var(--color-text); font-size: var(--font-sm); }
+  .round-dx { font-size: var(--font-xs); color: var(--color-text-secondary); margin-top: 2px; }
+
+  .round-actions-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+  .round-action-mini {
+    font-size: var(--font-xs);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .round-action-mini .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .round-status-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+    min-width: 120px;
+  }
+  .round-seen-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .round-seen-yes { background: var(--color-stable-bg); color: var(--color-stable); }
+  .round-seen-no  { background: var(--color-warning-bg); color: #6D4C00; }
+  .round-time {
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity &middot; Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU &middot; Cardiologist &middot; D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab tab-active">Rounds</div>
+    <div class="tab">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Rounds</h1>
+        <p class="page-subtitle">11 April 2026 &middot; Morning round started 07:15 &middot; Dr. Menon &middot; CICU + Cardiac Step-Down</p>
+      </div>
+    </div>
+
+    <div id="rounds-overview" class="rounds-summary">
+      <div class="rounds-stat">
+        <div class="rounds-stat-num" style="color:var(--color-stable);">4</div>
+        <div class="rounds-stat-label">Patients seen</div>
+      </div>
+      <div class="rounds-stat">
+        <div class="rounds-stat-num" style="color:var(--color-warning);">6</div>
+        <div class="rounds-stat-label">Still pending</div>
+      </div>
+      <div class="rounds-stat">
+        <div class="rounds-stat-num" style="color:var(--color-critical);">1</div>
+        <div class="rounds-stat-label">Urgent (not seen)</div>
+      </div>
+      <div class="rounds-stat">
+        <div class="rounds-stat-num" style="color:var(--color-text);">52m</div>
+        <div class="rounds-stat-label">Round time so far</div>
+      </div>
+    </div>
+
+    <div id="action-bar" class="action-summary" style="margin-bottom:var(--space-md);">
+      <span style="font-weight:600; color:var(--color-text);">Actions today</span>
+      <span class="action-summary-pill" style="background:#FFF8E1; color:#6D4C00;"><span class="dot" style="background:#F57F17;"></span>6 pending</span>
+      <span class="action-summary-pill" style="background:#E8F5E9; color:#2E7D32;"><span class="dot" style="background:#2E7D32;"></span>5 done</span>
+      <span style="margin-left:auto; font-size:var(--font-xs); color:var(--color-text-muted);">
+        Auto-resolves from <strong>Aster EMR</strong> &middot; last sync 08:07
+      </span>
+    </div>
+
+    <!-- URGENT: not seen yet -->
+    <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-critical); font-weight:700; margin-bottom:var(--space-sm);">Urgent &middot; not seen yet</div>
+
+    <div class="round-row round-row-urgent">
+      <div class="round-bed">1</div>
+      <div class="round-info">
+        <div class="round-name">Ms. Fatima Rahman, 28F</div>
+        <div class="round-dx">Acute viral myocarditis &middot; ECMO decision pending</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#D32F2F;"></span><strong style="color:var(--color-critical);">ECMO cannulation decision</strong></div>
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Family update</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+        <span class="round-time">Admitted 04:18</span>
+      </div>
+    </div>
+
+    <!-- PENDING: not seen yet -->
+    <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-warning); font-weight:700; margin:var(--space-lg) 0 var(--space-sm);">Pending &middot; 5 patients</div>
+
+    <div class="round-row round-row-pending">
+      <div class="round-bed">3</div>
+      <div class="round-info">
+        <div class="round-name">Mr. Hari Krishnan, 71M</div>
+        <div class="round-dx">NSTEMI awaiting cath &middot; CKD eGFR 38</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Confirm cath lab booking</div>
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Write CIN prevention orders</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+        <span class="round-time">No activity today</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-pending">
+      <div class="round-bed">5</div>
+      <div class="round-info">
+        <div class="round-name">Mr. K. George, 64M</div>
+        <div class="round-dx">Post-PCI day 4 &middot; for step-down today</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Write step-down transfer order</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-pending">
+      <div class="round-bed">6</div>
+      <div class="round-info">
+        <div class="round-name">Mr. A. Varghese, 71M</div>
+        <div class="round-dx">AF rate-controlled &middot; CHADS 4</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Anticoag plan: dabigatran vs warfarin</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-pending">
+      <div class="round-bed">9</div>
+      <div class="round-info">
+        <div class="round-name">Mrs. P. Joseph, 55F</div>
+        <div class="round-dx">NSTEMI day 3 &middot; medical management</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini" style="color:var(--color-text-muted);">No pending actions</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-pending">
+      <div class="round-bed">11</div>
+      <div class="round-info">
+        <div class="round-name">Mr. R. Iyer, 59M</div>
+        <div class="round-dx">Pericarditis &middot; ibuprofen + colchicine</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini" style="color:var(--color-text-muted);">No pending actions</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-no">Not seen</span>
+      </div>
+    </div>
+
+    <!-- SEEN: visited this round -->
+    <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-stable); font-weight:700; margin:var(--space-lg) 0 var(--space-sm);">Seen &middot; 4 patients</div>
+
+    <div class="round-row round-row-seen">
+      <div class="round-bed">12</div>
+      <div class="round-info">
+        <div class="round-name">Mr. Sasi Pillai, 62M</div>
+        <div class="round-dx">Post-PCI STEMI day 2 &middot; AKI</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">Hold metformin</span> <span class="auto-badge">auto EMR 07:22</span></div>
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">Hold ramipril</span> <span class="auto-badge">auto EMR 07:22</span></div>
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">Start NaHCO3 hydration</span> <span class="auto-badge">auto EMR 07:24</span></div>
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>Repeat U&amp;E at noon</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-yes">Seen 07:22</span>
+        <span class="round-time">3 of 4 actions done</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-seen">
+      <div class="round-bed">8</div>
+      <div class="round-info">
+        <div class="round-name">Mrs. Latha Nair, 58F</div>
+        <div class="round-dx">Decomp HFrEF &middot; milrinone wean</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">HF team consult booked</span> <span class="auto-badge">auto EMR 07:35</span></div>
+        <div class="round-action-mini"><span class="dot" style="background:#F57F17;"></span>LVAD vs transplant decision (09:00)</div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-yes">Seen 07:30</span>
+        <span class="round-time">1 of 2 actions done</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-seen">
+      <div class="round-bed">SD-4</div>
+      <div class="round-info">
+        <div class="round-name">Mr. Venu Rao, 68M</div>
+        <div class="round-dx">Pre-op CABG x3 tomorrow</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">Pre-op clearance signed</span> <span class="auto-badge">auto EMR 07:52</span></div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-yes">Seen 07:45</span>
+        <span class="round-time">All actions done</span>
+      </div>
+    </div>
+
+    <div class="round-row round-row-seen">
+      <div class="round-bed">SD-2</div>
+      <div class="round-info">
+        <div class="round-name">Mr. T. Mathew, 70M</div>
+        <div class="round-dx">POD-3 CABG x4 &middot; ambulating</div>
+      </div>
+      <div class="round-actions-col">
+        <div class="round-action-mini"><span class="dot" style="background:#2E7D32;"></span><span style="text-decoration:line-through; color:var(--color-text-muted);">Chest tube removal ordered</span> <span class="auto-badge">auto EMR 08:02</span></div>
+      </div>
+      <div class="round-status-col">
+        <span class="round-seen-badge round-seen-yes">Seen 07:58</span>
+        <span class="round-time">All actions done</span>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--space-lg); padding:var(--space-md); background:var(--color-info-bg); border-radius:var(--radius-md); font-size:var(--font-xs); color:var(--color-text-secondary);">
+      "Seen" is detected automatically when an order, note, or lab review is recorded for the patient during this shift. No manual check-in needed.
+    </div>
+
+  </main>
+</div>
+
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'Live rounding tracker. Shows which patients you have seen and what actions are still pending.'
+};
+var TOUR_STEPS = [
+  {
+    target: '#rounds-overview',
+    title: 'Round progress',
+    body: 'How many patients you have seen, how many are still pending, and how long the round has been going. Updates live as you visit patients.',
+    position: 'bottom'
+  },
+  {
+    target: '#action-bar',
+    title: 'Action queue',
+    body: 'Actions resolve automatically when orders appear in the EMR. The count updates in real time as your registrar enters orders.',
+    position: 'bottom'
+  },
+  {
+    target: '.round-row-urgent',
+    title: 'Urgent patients first',
+    body: 'Patients with critical pending decisions appear at the top in red. Ms. Fatima has an ECMO cannulation decision waiting.',
+    position: 'bottom'
+  },
+  {
+    target: '.round-row-seen',
+    title: 'Auto-detected visits',
+    body: 'When an order or note is entered for a patient in the EMR, OmniSense marks them as "Seen" with the timestamp. Completed actions show with an auto-resolved badge.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

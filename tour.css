@@ -1,0 +1,304 @@
+/* Guided Tour — Spotlight Walkthrough */
+
+/* Password gate */
+.password-gate {
+  position: fixed;
+  inset: 0;
+  background: #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.password-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 48px;
+  width: 420px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+.password-card h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 6px;
+}
+.password-card p {
+  font-size: 14px;
+  color: #616161;
+  margin-bottom: 24px;
+}
+.password-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.password-input:focus { border-color: #00796B; outline: none; }
+.password-submit {
+  width: 100%;
+  padding: 14px;
+  background: #00796B;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.password-submit:hover { background: #009688; }
+.password-error {
+  color: #D32F2F;
+  font-size: 13px;
+  margin-top: 12px;
+  display: none;
+}
+.password-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #00796B;
+  margin-bottom: 24px;
+}
+.password-logo span { color: #546E7A; font-weight: 400; }
+
+/* Spotlight overlay — dims everything except the target */
+.spotlight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+}
+.spotlight-overlay.active {
+  pointer-events: auto;
+}
+
+/* The dark mask with a hole cut out */
+.spotlight-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 401;
+  transition: all 300ms ease;
+}
+
+/* Tooltip that appears next to the spotlighted element */
+.spotlight-tooltip {
+  position: fixed;
+  z-index: 403;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  font-family: 'Inter', -apple-system, sans-serif;
+  transition: all 300ms ease;
+}
+.spotlight-tooltip-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #00796B;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.spotlight-tooltip-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.spotlight-tooltip-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #4DB6AC;
+}
+.spotlight-tooltip-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #F5F5F5;
+}
+.spotlight-tooltip-body strong {
+  color: #fff;
+}
+.spotlight-tooltip-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.spotlight-tooltip-dots {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+}
+.spotlight-tooltip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+}
+.spotlight-tooltip-dot.active { background: #00796B; }
+.spotlight-tooltip-dot.visited { background: rgba(0,121,107,0.5); }
+
+.spot-btn {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.spot-btn-skip {
+  background: transparent;
+  color: #9E9E9E;
+}
+.spot-btn-skip:hover { color: #fff; }
+.spot-btn-prev {
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+}
+.spot-btn-prev:hover { background: rgba(255,255,255,0.2); }
+.spot-btn-next {
+  background: #00796B;
+  color: white;
+}
+.spot-btn-next:hover { background: #009688; }
+
+/* Arrow pointer from tooltip to target */
+.spotlight-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #1a1a2e;
+  transform: rotate(45deg);
+}
+.spotlight-tooltip.arrow-top::before    { top: -6px; left: 32px; }
+.spotlight-tooltip.arrow-bottom::before { bottom: -6px; left: 32px; }
+.spotlight-tooltip.arrow-left::before   { left: -6px; top: 20px; }
+.spotlight-tooltip.arrow-right::before  { right: -6px; top: 20px; }
+
+/* Highlighted target ring */
+.spotlight-target-ring {
+  position: fixed;
+  z-index: 402;
+  border: 3px solid #00796B;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4000px rgba(0,0,0,0.55);
+  transition: all 300ms ease;
+  pointer-events: none;
+}
+
+/* Tour bar (persistent bottom nav for page-to-page) */
+.tour-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a2e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  gap: 14px;
+  z-index: 500;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+.tour-bar-step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00796B;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.tour-bar-of {
+  font-size: 12px;
+  color: #9E9E9E;
+  flex-shrink: 0;
+}
+.tour-bar-title {
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.tour-bar-desc {
+  flex: 1;
+  font-size: 12px;
+  color: #BDBDBD;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tour-bar-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.tour-bar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+}
+.tour-bar-dot.active { background: #00796B; }
+.tour-bar-dot.visited { background: rgba(0,121,107,0.5); }
+.tour-bar-nav {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.tour-bar-btn {
+  padding: 7px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tour-bar-prev {
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+}
+.tour-bar-prev:hover { background: rgba(255,255,255,0.2); }
+.tour-bar-next {
+  background: #00796B;
+  color: white;
+  animation: cta-bounce 1.2s ease-in-out infinite;
+  position: relative;
+}
+.tour-bar-next:hover { background: #009688; animation: none; transform: none; }
+
+@keyframes cta-bounce {
+  0%, 100% { transform: scale(1); background: #00796B; box-shadow: none; }
+  50% { transform: scale(1.12); background: #00BFA5; box-shadow: 0 0 12px rgba(0,191,165,0.6); }
+}
+.tour-bar-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+body.tour-active { padding-bottom: 52px; }

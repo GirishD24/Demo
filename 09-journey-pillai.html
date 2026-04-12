@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M9 — Journey · Mr. Pillai · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+<style>
+  /* Journey-specific styles */
+  .journey-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+  }
+  .journey-search {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    font-family: inherit;
+  }
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+  }
+  .filter-chip.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+  .filter-chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .new-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    font-size: var(--font-sm);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--color-border);
+  }
+  .timeline-day {
+    font-size: var(--font-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+    margin: var(--space-lg) 0 var(--space-sm) -40px;
+    padding-left: 40px;
+    position: relative;
+  }
+  .timeline-day::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-text-muted);
+  }
+
+  .te { /* timeline event */
+    position: relative;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: box-shadow 150ms ease;
+  }
+  .te:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+  .te::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 18px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 3px solid var(--color-info);
+  }
+  .te-admission::before { border-color: #1565C0; background: #1565C0; }
+  .te-lab::before       { border-color: #00796B; background: #00796B; }
+  .te-imaging::before   { border-color: #5E35B1; background: #5E35B1; }
+  .te-procedure::before { border-color: #C2185B; background: #C2185B; }
+  .te-med::before       { border-color: #EF6C00; background: #EF6C00; }
+  .te-alert::before     { border-color: var(--color-critical); background: var(--color-critical); }
+  .te-note::before      { border-color: var(--color-text-secondary); background: var(--color-text-secondary); }
+
+  .te-row { display: flex; align-items: baseline; gap: 12px; }
+  .te-time {
+    font-size: var(--font-xs);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    width: 56px;
+    flex-shrink: 0;
+  }
+  .te-cat {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    color: white;
+    flex-shrink: 0;
+  }
+  .te-cat-admission { background: #1565C0; }
+  .te-cat-lab       { background: #00796B; }
+  .te-cat-imaging   { background: #5E35B1; }
+  .te-cat-procedure { background: #C2185B; }
+  .te-cat-med       { background: #EF6C00; }
+  .te-cat-alert     { background: var(--color-critical); }
+  .te-cat-note      { background: var(--color-text-secondary); }
+
+  .te-title { font-weight: 600; color: var(--color-text); flex: 1; }
+  .te-detail {
+    margin-top: 4px;
+    margin-left: 76px;
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+  }
+  .te-detail strong { color: var(--color-text); }
+
+  .te-new {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    background: var(--color-warning);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .te-attach {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+    font-size: var(--font-xs);
+    color: var(--color-acknowledged);
+  }
+
+  /* Inline trend mini-chart for serial labs */
+  .trend-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    padding: 2px 6px;
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Lab popup modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal {
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    width: 640px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+  }
+  .modal-header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+  .modal-body { padding: var(--space-lg); }
+  .modal-footer {
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--color-bg);
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  }
+
+  .lab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-sm);
+  }
+  .lab-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: var(--font-xs);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .lab-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .lab-flag-h { color: var(--color-critical); font-weight: 700; }
+  .lab-flag-l { color: var(--color-acknowledged); font-weight: 700; }
+  .lab-flag-n { color: var(--color-stable); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab tab-active">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <h1 class="page-title" style="font-size:var(--font-xl);">Mr. Sasi Pillai &middot; Journey</h1>
+          <span class="badge badge-warning">AKI rising</span>
+        </div>
+        <p class="page-subtitle">62M &middot; CICU bed 12 &middot; MRN AST-2026-04-0998 &middot; Day 2 post-PCI &middot; admitted Tue 09 Apr 13:42</p>
+      </div>
+      <div style="display:flex; gap:var(--space-sm);">
+        <button class="btn btn-secondary btn-sm">Export PDF</button>
+        <button class="btn btn-secondary btn-sm">Compare to baseline</button>
+      </div>
+    </div>
+
+    <!-- Drawer-style tabs -->
+    <div class="drawer-tabs" style="background:var(--color-surface); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--color-border); border-bottom:none; padding:0 var(--space-md);">
+      <div class="drawer-tab">Summary</div>
+      <div class="drawer-tab active">Journey</div>
+      <div class="drawer-tab">Body</div>
+    </div>
+    <div style="background:var(--color-surface); border:1px solid var(--color-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:var(--space-md); margin-bottom:var(--space-md);">
+
+      <!-- Toolbar -->
+      <div class="journey-toolbar">
+        <input class="journey-search" type="text" placeholder="🔍 Search journey — drug name, lab, imaging, procedure, note..."/>
+        <select style="padding:10px 12px; border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm); font-family:inherit;">
+          <option>Since admission</option>
+          <option>Last 24 hours</option>
+          <option>Last 12 hours</option>
+          <option>Custom range...</option>
+        </select>
+      </div>
+
+      <!-- Filter chips -->
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:var(--space-md);">
+        <div class="filter-chip active">All <span style="opacity:0.7; margin-left:2px;">· 24</span></div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#1565C0;"></span>Admission · 1</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#00796B;"></span>Labs · 9</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#5E35B1;"></span>Imaging · 4</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#C2185B;"></span>Procedures · 1</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#EF6C00;"></span>Meds · 6</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#D32F2F;"></span>Alerts · 2</div>
+        <div class="filter-chip"><span class="filter-chip-dot" style="background:#616161;"></span>Notes · 1</div>
+      </div>
+
+      <!-- New since last shift banner -->
+      <div class="new-banner">
+        <span style="font-size:20px;">⚠</span>
+        <div style="flex:1;">
+          <strong>3 new events since your last shift</strong> (Dr. Anand handover at 19:30 yesterday) &middot;
+          <span style="color:var(--color-text-secondary);">2 lab results, 1 alert. The creatinine bump is the active concern.</span>
+        </div>
+        <button class="btn btn-ghost btn-sm">Show only new</button>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="timeline">
+
+        <div class="timeline-day">Today &middot; Sat 11 Apr 2026</div>
+
+        <div class="te te-lab" onclick="document.getElementById('lab-modal').style.display='flex'" style="cursor:pointer;">
+          <div class="te-row">
+            <span class="te-time">06:50</span>
+            <span class="te-cat te-cat-lab">Lab</span>
+            <span class="te-title">Renal panel &mdash; <span style="color:var(--color-warning);">Cr 1.4 ng/mL ↑</span></span>
+            <span class="te-new">New</span>
+          </div>
+          <div class="te-detail">
+            Was 0.9 yesterday AM &middot; <strong>+0.5 mg/dL in 24h = KDIGO stage 1 AKI</strong> &middot; eGFR 42 (was 60)
+            <span class="trend-inline">
+              <svg width="60" height="20" viewBox="0 0 60 20"><polyline points="2,15 15,15 30,12 45,8 58,4" fill="none" stroke="#F57F17" stroke-width="2"/></svg>
+              <span style="font-size:var(--font-xs); color:var(--color-warning); font-weight:700;">↑</span>
+            </span>
+            <span class="te-attach">📎 Full panel</span>
+          </div>
+        </div>
+
+        <div class="te te-alert">
+          <div class="te-row">
+            <span class="te-time">06:52</span>
+            <span class="te-cat te-cat-alert">Alert</span>
+            <span class="te-title">Drug-safety flag &mdash; metformin + ramipril in evolving AKI</span>
+            <span class="te-new">New</span>
+          </div>
+          <div class="te-detail">
+            Auto-raised by medication-safety pipeline &middot; eGFR &lt; 45 cut-off for metformin &middot; ACE-i in evolving AKI &middot;
+            <strong>recommends 24h hold</strong>
+          </div>
+        </div>
+
+        <div class="te te-lab">
+          <div class="te-row">
+            <span class="te-time">06:50</span>
+            <span class="te-cat te-cat-lab">Lab</span>
+            <span class="te-title">Troponin T &mdash; 1.4 ng/mL ↓</span>
+            <span class="te-new">New</span>
+          </div>
+          <div class="te-detail">
+            Down-trending (was 8.4 at +6h, 2.8 on admission) &middot; expected post-PCI clearance
+            <span class="trend-inline">
+              <svg width="60" height="20" viewBox="0 0 60 20"><polyline points="2,4 15,2 30,8 45,12 58,16" fill="none" stroke="#2E7D32" stroke-width="2"/></svg>
+              <span style="font-size:var(--font-xs); color:var(--color-stable); font-weight:700;">↓</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="te te-imaging">
+          <div class="te-row">
+            <span class="te-time">07:05</span>
+            <span class="te-cat te-cat-imaging">Imaging</span>
+            <span class="te-title">Bedside renal US &mdash; no obstruction</span>
+          </div>
+          <div class="te-detail">
+            Both kidneys normal size (~10 cm), no hydronephrosis, no perirenal collection &middot; supports parenchymal AKI not obstructive
+            <span class="te-attach">📎 Report + 4 images</span>
+          </div>
+        </div>
+
+        <div class="timeline-day">Yesterday &middot; Fri 10 Apr 2026</div>
+
+        <div class="te te-note">
+          <div class="te-row">
+            <span class="te-time">19:30</span>
+            <span class="te-cat te-cat-note">Note</span>
+            <span class="te-title">Shift handover &mdash; Dr. Anand</span>
+          </div>
+          <div class="te-detail">
+            "Stable post-PCI day 1. Pain controlled. UO 60-80 mL/h. Continue current regimen. Repeat U&amp;E in AM."
+          </div>
+        </div>
+
+        <div class="te te-lab">
+          <div class="te-row">
+            <span class="te-time">14:00</span>
+            <span class="te-cat te-cat-lab">Lab</span>
+            <span class="te-title">CBC &middot; BMP &middot; Troponin (12h)</span>
+          </div>
+          <div class="te-detail">
+            Hb 11.4 &middot; WBC 12.8 &middot; Cr <strong>0.9</strong> (baseline) &middot; Trop 2.6 (from 8.4 peak)
+            <span class="te-attach">📎 Full panel</span>
+          </div>
+        </div>
+
+        <div class="te te-imaging">
+          <div class="te-row">
+            <span class="te-time">10:00</span>
+            <span class="te-cat te-cat-imaging">Imaging</span>
+            <span class="te-title">Echo TTE &mdash; EF 38%</span>
+          </div>
+          <div class="te-detail">
+            Anterior wall hypokinesia (LAD territory) &middot; mild LV dysfunction &middot; no MR/AR &middot; no pericardial effusion
+            <span class="te-attach">📎 Report</span>
+            <span class="te-attach">🎬 Clip · open in PACS</span>
+          </div>
+        </div>
+
+        <div class="te te-med">
+          <div class="te-row">
+            <span class="te-time">08:00</span>
+            <span class="te-cat te-cat-med">Med</span>
+            <span class="te-title">Oral regimen started</span>
+          </div>
+          <div class="te-detail">
+            Aspirin 75 OD &middot; Ticagrelor 90 BD &middot; Atorvastatin 80 OD &middot; Bisoprolol 2.5 OD &middot;
+            <strong>Ramipril 5 OD</strong> &middot; <strong>Metformin 1g BD</strong>
+          </div>
+        </div>
+
+        <div class="timeline-day">Tue 09 Apr 2026 &middot; Day 0</div>
+
+        <div class="te te-imaging">
+          <div class="te-row">
+            <span class="te-time">16:00</span>
+            <span class="te-cat te-cat-imaging">Imaging</span>
+            <span class="te-title">Post-procedure CXR portable</span>
+          </div>
+          <div class="te-detail">
+            Mild pulmonary congestion &middot; no pneumothorax &middot; stent wires in situ &middot; CVL tip at SVC-RA junction
+            <span class="te-attach">📎 Report</span>
+            <span class="te-attach">🖼 1 image · open in PACS</span>
+          </div>
+        </div>
+
+        <div class="te te-procedure">
+          <div class="te-row">
+            <span class="te-time">14:20</span>
+            <span class="te-cat te-cat-procedure">Procedure</span>
+            <span class="te-title">Primary PCI &mdash; LAD DES 3.0 &times; 28 mm</span>
+          </div>
+          <div class="te-detail">
+            <strong>Door-to-balloon 55 min</strong> &middot; Operator: Dr. R. Menon &middot; Radial access &middot; Contrast 145 mL Omnipaque &middot;
+            TIMI 3 flow restored &middot; no complications
+            <span class="te-attach">📎 Cath report</span>
+          </div>
+        </div>
+
+        <div class="te te-lab">
+          <div class="te-row">
+            <span class="te-time">14:00</span>
+            <span class="te-cat te-cat-lab">Lab</span>
+            <span class="te-title">Troponin T &mdash; <span style="color:var(--color-critical);">2.8 ng/mL ↑↑</span></span>
+          </div>
+          <div class="te-detail">
+            <strong>Critical high</strong> (normal &lt;0.04) &middot; consistent with acute MI
+            <span class="te-attach">📎 Full panel</span>
+          </div>
+        </div>
+
+        <div class="te te-imaging">
+          <div class="te-row">
+            <span class="te-time">13:50</span>
+            <span class="te-cat te-cat-imaging">Imaging</span>
+            <span class="te-title">ECG 12-lead &mdash; ST elevation V1-V4</span>
+          </div>
+          <div class="te-detail">
+            Acute anterior STEMI &middot; LAD culprit &middot; cath lab activated
+            <span class="te-attach">📎 ECG strip</span>
+          </div>
+        </div>
+
+        <div class="te te-admission">
+          <div class="te-row">
+            <span class="te-time">13:42</span>
+            <span class="te-cat te-cat-admission">Admission</span>
+            <span class="te-title">ED &rarr; CICU &middot; chest pain 2h, central, radiating to L arm</span>
+          </div>
+          <div class="te-detail">
+            BP 138/84 &middot; HR 92 SR &middot; SpO₂ 95% RA &middot; T2DM 15y on metformin + ramipril &middot; smoker 30 pack-years &middot; PMH HTN, dyslipidaemia
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- LAB POPUP MODAL (showing the new troponin / renal result) -->
+  <div class="modal-overlay" id="lab-modal" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span class="te-cat te-cat-lab">Lab</span>
+            <span style="font-size:var(--font-xs); color:var(--color-text-muted); font-weight:600;">11 Apr 2026 &middot; 06:50 &middot; AST-LAB-2026-04-7821</span>
+          </div>
+          <div style="font-size:var(--font-lg); font-weight:700; color:var(--color-text);">Renal panel &middot; serum</div>
+          <div style="font-size:var(--font-xs); color:var(--color-text-muted); margin-top:2px;">Source: HL7 ORU^R01 from Aster LIS &middot; processed 06:51:14</div>
+        </div>
+        <button class="drawer-close" onclick="document.getElementById('lab-modal').style.display='none'">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <table class="lab-table">
+          <thead>
+            <tr><th>Analyte</th><th>Value</th><th>Unit</th><th>Reference</th><th>Flag</th><th>Δ vs prev</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sodium</strong></td><td>138</td><td>mmol/L</td><td>135–145</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Potassium</strong></td><td>4.6</td><td>mmol/L</td><td>3.5–5.0</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>↑ from 4.2</td>
+            </tr>
+            <tr>
+              <td><strong>Chloride</strong></td><td>102</td><td>mmol/L</td><td>96–108</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Bicarbonate</strong></td><td>22</td><td>mmol/L</td><td>22–28</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>↓ from 24</td>
+            </tr>
+            <tr>
+              <td><strong>Urea</strong></td><td>9.8</td><td>mmol/L</td><td>2.5–7.5</td>
+              <td><span class="lab-flag-h">High</span></td><td>↑ from 6.4</td>
+            </tr>
+            <tr style="background:#FFF8E1;">
+              <td><strong>Creatinine</strong></td><td><strong>1.4</strong></td><td>mg/dL</td><td>0.7–1.2</td>
+              <td><span class="lab-flag-h">High ↑</span></td><td><strong>↑ from 0.9</strong></td>
+            </tr>
+            <tr style="background:#FFF8E1;">
+              <td><strong>eGFR (CKD-EPI)</strong></td><td><strong>42</strong></td><td>mL/min/1.73m²</td><td>≥60</td>
+              <td><span class="lab-flag-h">Low ↓</span></td><td><strong>↓ from 60</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Calcium</strong></td><td>2.28</td><td>mmol/L</td><td>2.20–2.60</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Phosphate</strong></td><td>1.32</td><td>mmol/L</td><td>0.80–1.50</td>
+              <td><span class="lab-flag-n">Normal</span></td><td>↑ from 1.18</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Trend chart -->
+        <div style="margin-top:var(--space-lg); padding:var(--space-md); background:var(--color-bg); border-radius:var(--radius-md);">
+          <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.5px; color:var(--color-text-muted); font-weight:700; margin-bottom:8px;">
+            Creatinine trend &middot; since admission
+          </div>
+          <svg width="100%" height="80" viewBox="0 0 560 80" preserveAspectRatio="none">
+            <line x1="0" y1="55" x2="560" y2="55" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="2" y="52" font-size="9" fill="#9E9E9E">upper ref 1.2</text>
+            <polyline points="20,60 140,62 280,60 420,55 540,30" fill="none" stroke="#F57F17" stroke-width="2.5"/>
+            <circle cx="20"  cy="60" r="4" fill="#2E7D32"/><text x="14"  y="76" font-size="9" fill="#616161">0.9</text>
+            <circle cx="140" cy="62" r="4" fill="#2E7D32"/><text x="120" y="76" font-size="9" fill="#616161">+12h 0.8</text>
+            <circle cx="280" cy="60" r="4" fill="#2E7D32"/><text x="260" y="76" font-size="9" fill="#616161">+24h 0.9</text>
+            <circle cx="420" cy="55" r="4" fill="#F57F17"/><text x="400" y="76" font-size="9" fill="#616161">+36h 1.1</text>
+            <circle cx="540" cy="30" r="5" fill="#D32F2F"/><text x="510" y="22" font-size="11" fill="#D32F2F" font-weight="700">1.4 ↑</text>
+          </svg>
+        </div>
+
+        <!-- AI annotation -->
+        <div class="ai-bubble" style="margin-top:var(--space-md);">
+          <div class="ai-bubble-header">
+            <div class="ai-bubble-icon">AI</div>
+            <span>OmniSense &middot; lab interpretation</span>
+          </div>
+          <div class="ai-bubble-body" style="font-size:var(--font-sm);">
+            <strong>KDIGO Stage 1 AKI</strong> (creatinine rise ≥0.3 mg/dL within 48h). Most likely
+            <strong>contrast-induced nephropathy</strong> from yesterday's PCI (145 mL Omnipaque).
+            Bicarbonate trending down + urea rising support an evolving picture rather than a stable post-procedure dip.
+            Active medications metformin and ramipril contribute &mdash; flagged for hold.
+          </div>
+          <div class="cite-row">
+            <span class="cite">KDIGO AKI 2024 §1.2</span>
+            <span class="cite">Aster CIN prevention pathway v2.1</span>
+            <span class="cite">Med-safety pipeline 06:52</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div style="font-size:var(--font-xs); color:var(--color-text-muted);">
+          Source: <strong>Aster LIS</strong> via HL7 v2 &middot; Authorised by Dr. P. Iyer (lab director)
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary btn-sm">Open in EMR</button>
+          <button class="btn btn-secondary btn-sm">Compare to baseline</button>
+          <button class="btn btn-primary btn-sm">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'Mr. Pillai patient journey. Every event since admission on a clickable timeline.'
+};
+var TOUR_STEPS = [
+  {
+    target: '.new-banner',
+    title: 'What changed since your last shift',
+    body: '<strong>3 new events overnight.</strong> The creatinine bump and the drug-safety flag are highlighted so you see them immediately.',
+    position: 'bottom'
+  },
+  {
+    target: '.journey-toolbar',
+    title: 'Search and filter',
+    body: 'Search for any drug, lab, or procedure. Filter by category (labs, imaging, meds, alerts). Scope to the last 12 hours or custom range.',
+    position: 'bottom'
+  },
+  {
+    target: '.te-lab',
+    title: 'Clickable lab results',
+    body: 'Tap any lab event to open the full result panel with reference ranges, trend charts, and AI interpretation. Inline sparklines show the direction. Try clicking one after the tour.',
+    position: 'right'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

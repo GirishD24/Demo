@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M5 — Fatima drawer · Body view · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab tab-active">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main" style="opacity:0.45; pointer-events:none;">
+    <div class="page-header"><div><h1 class="page-title">Your patients</h1><p class="page-subtitle">11 patients &middot; CICU + Cardiac Surgical Step-Down</p></div></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:var(--space-md);">
+      <div class="card" style="border-left:6px solid var(--color-critical); padding:12px 16px; background:var(--color-primary-bg);"><strong>Ms. Fatima Rahman, 28F</strong> &middot; CICU 1 &middot; Myocarditis</div>
+      <div class="card" style="border-left:6px solid var(--color-warning); padding:12px 16px;"><strong>Mr. Sasi Pillai, 62M</strong> &middot; CICU 12 &middot; Post-PCI STEMI</div>
+      <div class="card" style="border-left:6px solid var(--color-warning); padding:12px 16px;"><strong>Mrs. Latha Nair, 58F</strong> &middot; CICU 8 &middot; Decomp HFrEF</div>
+      <div class="card" style="border-left:6px solid var(--color-warning); padding:12px 16px;"><strong>Mr. Hari Krishnan, 71M</strong> &middot; CICU 3 &middot; NSTEMI</div>
+      <div class="card" style="border-left:6px solid var(--color-warning); padding:12px 16px;"><strong>Mr. Venu Rao, 68M</strong> &middot; SD-4 &middot; Pre-op CABG</div>
+      <div class="card" style="border-left:6px solid var(--color-stable); padding:12px 16px;"><strong>Mr. K. George, 64M</strong> &middot; CICU 5</div>
+    </div>
+  </main>
+
+  <!-- DRAWER OVERLAY -->
+  <div class="drawer-overlay">
+    <div class="drawer" style="width: 820px;">
+
+      <div class="drawer-header" style="background: var(--color-critical-bg); border-bottom-color: var(--color-critical-border);">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+            <span style="font-size:var(--font-xl); font-weight:700; color:var(--color-text);">Ms. Fatima Rahman</span>
+            <span class="badge badge-critical">Crashing</span>
+            <span class="badge badge-outline">ECMO decision &middot; <strong style="color:var(--color-critical);">live</strong></span>
+          </div>
+          <div style="font-size:var(--font-sm); color:var(--color-text);">
+            28F &middot; CICU bed 1 &middot; MRN AST-2026-04-1142 &middot; Admitted today 04:18 (2h 50m ago)
+          </div>
+        </div>
+        <button class="drawer-close" title="Close">&times;</button>
+      </div>
+
+      <div class="drawer-tabs">
+        <div class="drawer-tab">Summary</div>
+        <div class="drawer-tab">Journey</div>
+        <div class="drawer-tab active">Body</div>
+      </div>
+
+      <div class="drawer-body">
+
+        <!-- ECMO decision panel -->
+        <div class="card card-critical" style="margin-bottom:var(--space-lg);">
+          <div style="display:flex; align-items:flex-start; gap:var(--space-md);">
+            <div style="font-size:32px;">&#9888;</div>
+            <div style="flex:1;">
+              <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-critical); font-weight:700; margin-bottom:6px;">Active decision &middot; awaiting cardiology lead call</div>
+              <div style="font-size:var(--font-lg); font-weight:600; color:var(--color-text); margin-bottom:8px;">VA-ECMO &mdash; cannulate now or wait 4 h?</div>
+              <div style="font-size:var(--font-sm); color:var(--color-text); line-height:1.6;">
+                Trajectory is unfavourable: <strong>EF 28 &rarr; 22</strong>, lactate <strong>4.8 &rarr; 3.6</strong> (slowing), MAP 62 on
+                escalating inotropes, UO <strong>38 &rarr; 18 mL/h</strong>, new RV strain on echo. ELSO criteria met for
+                fulminant myocarditis bridge-to-recovery.
+              </div>
+              <div style="margin-top:var(--space-md); display:flex; gap:var(--space-sm); flex-wrap:wrap;">
+                <button class="btn btn-critical btn-sm">Cannulate now</button>
+                <button class="btn btn-secondary btn-sm">Hold &middot; reassess at 11:00</button>
+                <button class="btn btn-ghost btn-sm">Ask AI &middot; what would you do?</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Heart body view — apical 4-chamber echo schematic -->
+        <div class="organ-card" style="margin-bottom: var(--space-lg);">
+          <div class="organ-card-title">Apical 4-chamber view &middot; global hypokinesia &middot; RV strain</div>
+          <svg class="organ-svg" style="max-width: 460px;" viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+              <!-- Diagonal hatch for hypokinesia -->
+              <pattern id="hypokinesis" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="6" stroke="#D32F2F" stroke-width="1.2" opacity="0.5"/>
+              </pattern>
+            </defs>
+
+            <!-- Aortic root stub at top center -->
+            <rect x="218" y="20" width="24" height="40" fill="#FFEBEE" stroke="#9E9E9E" stroke-width="2" rx="2"/>
+            <text x="248" y="40" font-size="10" fill="#616161">Aorta</text>
+
+            <!-- Aortic valve cusps (normal, mitral region) -->
+            <g stroke="#616161" stroke-width="1.5" fill="#FFF">
+              <path d="M 218 60 Q 224 70 230 60 Z"/>
+              <path d="M 230 60 Q 236 70 242 60 Z"/>
+            </g>
+
+            <!-- LEFT ATRIUM (top right of viewer) -->
+            <path d="M 240 60
+                     Q 320 60 340 100
+                     Q 345 145 290 145
+                     Q 245 145 240 110 Z"
+                  fill="#FAFAFA" stroke="#9E9E9E" stroke-width="2.5"/>
+            <text x="290" y="105" font-size="13" fill="#616161" font-weight="600">LA</text>
+
+            <!-- RIGHT ATRIUM (top left of viewer) -->
+            <path d="M 218 60
+                     Q 138 60 118 100
+                     Q 113 145 168 145
+                     Q 213 145 218 110 Z"
+                  fill="#FAFAFA" stroke="#9E9E9E" stroke-width="2.5"/>
+            <text x="155" y="105" font-size="13" fill="#616161" font-weight="600">RA</text>
+
+            <!-- MITRAL VALVE (between LA and LV) -->
+            <line x1="244" y1="145" x2="296" y2="145" stroke="#616161" stroke-width="2.5"/>
+            <line x1="248" y1="145" x2="252" y2="160" stroke="#616161" stroke-width="1.5"/>
+            <line x1="290" y1="145" x2="288" y2="160" stroke="#616161" stroke-width="1.5"/>
+            <text x="305" y="148" font-size="9" fill="#9E9E9E">MV</text>
+
+            <!-- TRICUSPID VALVE -->
+            <line x1="164" y1="145" x2="216" y2="145" stroke="#616161" stroke-width="2.5"/>
+            <line x1="170" y1="145" x2="172" y2="160" stroke="#616161" stroke-width="1.5"/>
+            <line x1="212" y1="145" x2="208" y2="160" stroke="#616161" stroke-width="1.5"/>
+            <text x="138" y="148" font-size="9" fill="#9E9E9E">TV</text>
+
+            <!-- LEFT VENTRICLE — thick wall, full amber wash for global hypokinesia -->
+            <path d="M 244 145
+                     Q 260 145 296 145
+                     Q 360 165 360 240
+                     Q 358 305 240 330
+                     L 240 145 Z"
+                  fill="#FFEBEE" stroke="#D32F2F" stroke-width="3.5"/>
+            <path d="M 244 145
+                     Q 260 145 296 145
+                     Q 360 165 360 240
+                     Q 358 305 240 330
+                     L 240 145 Z"
+                  fill="url(#hypokinesis)" stroke="none"/>
+            <text x="282" y="225" font-size="14" fill="#D32F2F" font-weight="700">LV</text>
+            <text x="265" y="245" font-size="11" fill="#D32F2F" font-weight="700">EF 22%</text>
+            <text x="248" y="262" font-size="9" fill="#D32F2F">global hypokinesia</text>
+
+            <!-- RIGHT VENTRICLE — DILATED (wider than normal), strain hatch -->
+            <path d="M 216 145
+                     Q 200 145 164 145
+                     Q 75 170 70 245
+                     Q 80 315 220 330
+                     L 220 145 Z"
+                  fill="#FFF8E1" stroke="#F57F17" stroke-width="3.5"/>
+            <path d="M 216 145
+                     Q 200 145 164 145
+                     Q 75 170 70 245
+                     Q 80 315 220 330
+                     L 220 145 Z"
+                  fill="url(#hypokinesis)" stroke="none" opacity="0.6"/>
+            <text x="135" y="225" font-size="14" fill="#F57F17" font-weight="700">RV</text>
+            <text x="100" y="245" font-size="11" fill="#F57F17" font-weight="700">dilated</text>
+            <text x="100" y="262" font-size="9" fill="#F57F17">strain pattern</text>
+
+            <!-- Septum (mid line, flattened toward LV — septal bowing from RV pressure) -->
+            <path d="M 230 145 Q 240 240 230 330" stroke="#D32F2F" stroke-width="2.5" fill="none"/>
+            <text x="200" y="338" font-size="9" fill="#9E9E9E">septum (bowed)</text>
+
+            <!-- Apex marker -->
+            <circle cx="230" cy="332" r="4" fill="#D32F2F"/>
+            <text x="240" y="350" font-size="9" fill="#616161">apex</text>
+
+            <!-- View label -->
+            <text x="10" y="20" font-size="10" fill="#9E9E9E" font-weight="600">A4C view</text>
+            <text x="10" y="34" font-size="9" fill="#9E9E9E">06:42 echo</text>
+
+            <!-- Trend strip on right -->
+            <g transform="translate(380 150)">
+              <text x="0" y="0" font-size="9" fill="#616161" font-weight="700">EF TREND</text>
+              <rect x="0" y="10" width="60" height="50" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+              <!-- Drop line: 28 → 22 -->
+              <polyline points="5,20 30,28 55,42" fill="none" stroke="#D32F2F" stroke-width="2.5"/>
+              <circle cx="5"  cy="20" r="2.5" fill="#D32F2F"/>
+              <circle cx="30" cy="28" r="2.5" fill="#D32F2F"/>
+              <circle cx="55" cy="42" r="2.5" fill="#D32F2F"/>
+              <text x="0" y="75" font-size="8" fill="#616161">04:48</text>
+              <text x="42" y="75" font-size="8" fill="#616161">06:42</text>
+              <text x="0" y="90" font-size="9" fill="#D32F2F" font-weight="700">28 &rarr; 25 &rarr; 22%</text>
+            </g>
+
+          </svg>
+          <div class="organ-callout organ-callout-crit">
+            Coronaries clean on emergency angio &middot; this is <strong>inflammatory, not ischaemic</strong>. Influenza A swab positive,
+            CRP 184. Bridge-to-recovery is the goal &mdash; most fulminant myocarditis recovers ventricular function with
+            mechanical support and time.
+          </div>
+        </div>
+
+        <!-- Vital snapshot -->
+        <h3 style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-text-muted); font-weight:600; margin-bottom:var(--space-sm);">
+          Vitals trajectory &middot; last 3 h
+        </h3>
+        <div class="tile-grid" style="margin-bottom:var(--space-lg);">
+          <div class="tile tile-crit"><div class="tile-label">MAP</div><div class="tile-value">62</div><div class="tile-trend">was 68 &middot; on inotropes</div></div>
+          <div class="tile tile-warn"><div class="tile-label">HR</div><div class="tile-value">128</div><div class="tile-trend">sinus tach</div></div>
+          <div class="tile tile-warn"><div class="tile-label">SpO&#x2082;</div><div class="tile-value">93%</div><div class="tile-trend">6L NC</div></div>
+          <div class="tile tile-crit"><div class="tile-label">UO</div><div class="tile-value">18</div><div class="tile-trend">mL/h &middot; was 38</div></div>
+          <div class="tile tile-warn"><div class="tile-label">Lactate</div><div class="tile-value">3.6</div><div class="tile-trend">slowing &middot; was 4.8</div></div>
+          <div class="tile tile-crit"><div class="tile-label">EF</div><div class="tile-value">22%</div><div class="tile-trend">was 28%</div></div>
+        </div>
+
+        <!-- Multi-discipline contacts -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Multi-discipline team &middot; on the floor</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm);">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:600;">KM</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Dr. Krishnamurthy</div>
+                <div style="color:var(--color-text-muted); font-size:var(--font-xs);">Cardiac surgery &middot; ECMO lead</div>
+              </div>
+              <span class="badge badge-stable">at bedside</span>
+              <button class="btn btn-secondary btn-sm">Page</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm);">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:600;">SP</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Sruthi Pillai</div>
+                <div style="color:var(--color-text-muted); font-size:var(--font-xs);">Senior perfusionist &middot; circuit ready</div>
+              </div>
+              <span class="badge badge-stable">at bedside</span>
+              <button class="btn btn-secondary btn-sm">Page</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm);">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:600;">AJ</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Dr. Anu Joseph</div>
+                <div style="color:var(--color-text-muted); font-size:var(--font-xs);">Cardiac anaesthesia &middot; called</div>
+              </div>
+              <span class="badge badge-acknowledged">en route</span>
+              <button class="btn btn-secondary btn-sm">Page</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm);">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--color-primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:600;">LN</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Lakshmi Nair (N001)</div>
+                <div style="color:var(--color-text-muted); font-size:var(--font-xs);">CICU charge nurse &middot; assigned</div>
+              </div>
+              <span class="badge badge-stable">at bedside</span>
+              <button class="btn btn-secondary btn-sm">Page</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELSO citation -->
+        <div style="padding:var(--space-md); background:var(--color-info-bg); border-radius:var(--radius-md); display:flex; align-items:center; gap:var(--space-md);">
+          <div style="font-size:var(--font-sm); color:var(--color-text-secondary); flex:1;">
+            <strong style="color:var(--color-text);">Reference:</strong> ELSO Adult Respiratory and Cardiac Failure 2023 &middot; ESC Myocarditis Position Statement 2023 &middot; Class IIa indication for VA-ECMO in fulminant myocarditis with cardiogenic shock refractory to inotropes.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'Ms. Fatima patient drawer. The crashing-patient moment with an active ECMO decision.'
+};
+var TOUR_STEPS = [
+  {
+    target: '.card-critical',
+    title: 'Active decision',
+    body: 'The ECMO team is at the bedside asking whether to cannulate now or wait. OmniSense surfaces the clinical trajectory supporting the decision.',
+    position: 'bottom'
+  },
+  {
+    target: '.organ-card',
+    title: 'Apical 4-chamber echo view',
+    body: 'The same view your echo tech shows you. <strong>Global hypokinesia</strong> across the LV, <strong>RV strain with dilation</strong>, EF trending down from 28 to 22. Coronaries are clean.',
+    position: 'left'
+  },
+  {
+    target: '.tile-grid',
+    title: 'Vitals trending the wrong way',
+    body: 'MAP 62, urine output dropping, lactate slowing its improvement. Every red tile is a data point supporting the ECMO decision.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M10 — Knowledge tab · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+<style>
+  .rag-input-row {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+  .rag-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-base);
+    font-family: inherit;
+    transition: border-color 150ms ease;
+  }
+  .rag-input:focus { border-color: var(--color-primary); outline: none; }
+
+  .rag-scope-chips {
+    display: flex;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .scope-chip {
+    padding: 6px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+  }
+  .scope-chip.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .source-card {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .source-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); }
+  .source-card + .source-card { margin-top: 8px; }
+  .source-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+  }
+  .source-tag-guideline { background: #00796B; }
+  .source-tag-drug      { background: #5E35B1; }
+  .source-tag-protocol  { background: #1565C0; }
+  .source-tag-evidence  { background: #C2185B; }
+
+  .confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: var(--space-md);
+    font-size: var(--font-xs);
+    color: var(--color-text-muted);
+  }
+  .confidence-track {
+    flex: 1;
+    max-width: 200px;
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .confidence-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  .recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .recent-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    cursor: pointer;
+  }
+  .recent-item:hover { background: var(--color-surface-hover); }
+  .recent-q { flex: 1; color: var(--color-text); font-style: italic; }
+  .recent-meta { font-size: var(--font-xs); color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab">Patients</div>
+    <div class="tab tab-active">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Clinical knowledge</h1>
+        <p class="page-subtitle">Evidence-based lookup &middot; guidelines, drug references, hospital protocols &middot; patient-scoped when a focus is set</p>
+      </div>
+      <div style="display:flex; gap:var(--space-sm); align-items:center;">
+        <div style="padding:6px 14px; background:var(--color-primary-bg); border:1px solid var(--color-primary); border-radius:var(--radius-full); font-size:var(--font-xs); color:var(--color-primary-dark); font-weight:600;">
+          Focus: Mr. Pillai, CICU 12
+        </div>
+        <button class="btn btn-secondary btn-sm">Clear focus</button>
+        <button class="mic-fab" style="width:44px; height:44px;" title="Ask by voice">
+          <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search input -->
+    <div class="rag-input-row">
+      <input class="rag-input" type="text" value="KDIGO AKI staging criteria for contrast nephropathy — when to start RRT?" placeholder="Ask a clinical question..."/>
+      <button class="btn btn-primary" style="padding:0 24px;">Search</button>
+    </div>
+
+    <!-- Scope chips -->
+    <div class="rag-scope-chips">
+      <div class="scope-chip active">All sources</div>
+      <div class="scope-chip">Guidelines (ESC, ACC/AHA, KDIGO)</div>
+      <div class="scope-chip">Drug references</div>
+      <div class="scope-chip">Aster protocols</div>
+      <div class="scope-chip">Evidence (RCTs, meta-analyses)</div>
+      <div class="scope-chip">Patient-scoped</div>
+    </div>
+
+    <!-- AI answer -->
+    <div class="ai-bubble" style="margin-bottom:var(--space-lg);">
+      <div class="ai-bubble-header">
+        <div class="ai-bubble-icon">AI</div>
+        <span>OmniSense &middot; knowledge lookup</span>
+        <span style="margin-left:auto; font-weight:400; color:var(--color-text-muted);">1.8s &middot; 4 sources matched &middot; patient context applied</span>
+      </div>
+      <div class="ai-bubble-body">
+        <strong>KDIGO defines AKI in 3 stages</strong> based on creatinine rise and/or urine output criteria:
+        <br><br>
+        <strong>Stage 1:</strong> Cr rise ≥0.3 mg/dL within 48h OR 1.5–1.9&times; baseline within 7 days OR UO &lt;0.5 mL/kg/h for 6–12h.
+        <br>
+        <strong>Stage 2:</strong> Cr 2.0–2.9&times; baseline OR UO &lt;0.5 mL/kg/h for ≥12h.
+        <br>
+        <strong>Stage 3:</strong> Cr ≥3.0&times; baseline OR Cr ≥4.0 mg/dL OR initiation of RRT OR UO &lt;0.3 mL/kg/h for ≥24h OR anuria ≥12h.
+        <br><br>
+        <strong>For contrast-induced nephropathy specifically:</strong> onset typically 24–72h post-contrast. Peak creatinine usually at 3–5 days, with recovery by 7–14 days in most cases. Risk factors include baseline CKD (eGFR &lt;60), diabetes, volume depletion, and high contrast load.
+        <br><br>
+        <strong style="color:var(--color-primary-dark);">Applied to Mr. Pillai:</strong> creatinine rose from 0.9 to 1.4 mg/dL (+0.5) within 24h of PCI with 145 mL Omnipaque. This meets <strong>KDIGO Stage 1</strong> criteria. Current eGFR 42 (from baseline ~60). He has two modifiable risk amplifiers: ACE-i (ramipril) and metformin — both flagged for hold.
+        <br><br>
+        <strong>When to start RRT:</strong> KDIGO does not recommend a specific creatinine threshold for RRT initiation in CIN. Indications are the standard emergent criteria — refractory hyperkalaemia, refractory fluid overload, acidosis (pH &lt;7.1), or uraemic complications. The STARRT-AKI trial (2020) found no benefit to early vs. standard-timing RRT in the absence of urgent indications. <strong>Mr. Pillai is not near RRT territory</strong> — his potassium is 4.6, bicarbonate 22, and he is producing urine.
+      </div>
+      <div class="confidence-bar">
+        <span>Confidence:</span>
+        <div class="confidence-track"><div class="confidence-fill" style="width:92%; background:var(--color-stable);"></div></div>
+        <span style="font-weight:700; color:var(--color-stable);">92%</span>
+        <span style="margin-left:auto;">Disclaimer: reference only — clinical decision rests with treating physician</span>
+      </div>
+    </div>
+
+    <!-- Matched sources -->
+    <h3 style="font-size:var(--font-sm); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-text-muted); font-weight:700; margin-bottom:var(--space-sm);">
+      Sources cited &middot; 4 matches
+    </h3>
+
+    <div class="source-card">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+        <span class="source-tag source-tag-guideline">Guideline</span>
+        <span style="font-weight:600; color:var(--color-text);">KDIGO Clinical Practice Guideline for Acute Kidney Injury (2024 update)</span>
+      </div>
+      <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">
+        Section 2.1 — Definition and staging of AKI. Table 2: KDIGO stages by creatinine and urine output criteria. Section 5.3 — Contrast-induced AKI prevention and management.
+      </div>
+      <div style="margin-top:6px; font-size:var(--font-xs); color:var(--color-text-muted);">
+        pp. 14–18, 52–56 &middot; 92% match &middot; Indexed 2026-03-15
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+        <span class="source-tag source-tag-evidence">Evidence</span>
+        <span style="font-weight:600; color:var(--color-text);">STARRT-AKI Trial (NEJM 2020)</span>
+      </div>
+      <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">
+        Accelerated vs standard-timing initiation of RRT in AKI. n=2927. No significant difference in 90-day mortality. Conclusion: no benefit to early RRT in the absence of urgent indications.
+      </div>
+      <div style="margin-top:6px; font-size:var(--font-xs); color:var(--color-text-muted);">
+        NEJM 383;3:240–251 &middot; 87% match &middot; Indexed 2026-03-15
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+        <span class="source-tag source-tag-protocol">Protocol</span>
+        <span style="font-weight:600; color:var(--color-text);">Aster Medcity — CIN Prevention Pathway v2.1</span>
+      </div>
+      <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">
+        Hospital-specific protocol for contrast-induced nephropathy prevention. NaHCO3 1 mL/kg/h pre- and post-procedure. Hold metformin 48h. Hold ACE-i/ARB if eGFR &lt;45. Minimum contrast volume strategy.
+      </div>
+      <div style="margin-top:6px; font-size:var(--font-xs); color:var(--color-text-muted);">
+        Internal document &middot; 85% match &middot; Indexed 2026-04-01
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+        <span class="source-tag source-tag-drug">Drug</span>
+        <span style="font-weight:600; color:var(--color-text);">Metformin — renal dose adjustment (BNF / Aster formulary v8.2)</span>
+      </div>
+      <div style="font-size:var(--font-sm); color:var(--color-text-secondary);">
+        eGFR 30–45: reduce dose to 500mg BD, review at 3 months. eGFR &lt;30: contraindicated. Hold 48h before and after iodinated contrast if eGFR &lt;45. Risk of lactic acidosis in renal impairment.
+      </div>
+      <div style="margin-top:6px; font-size:var(--font-xs); color:var(--color-text-muted);">
+        BNF 82 (2024) + Aster formulary v8.2 &middot; 81% match &middot; Indexed 2026-03-20
+      </div>
+    </div>
+
+    <!-- Recent queries -->
+    <h3 style="margin-top:var(--space-xl); font-size:var(--font-sm); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-text-muted); font-weight:700; margin-bottom:var(--space-sm);">
+      Recent queries &middot; this shift
+    </h3>
+
+    <div class="recent-list">
+      <div class="recent-item">
+        <span style="font-size:14px;">🔎</span>
+        <span class="recent-q">&ldquo;KDIGO AKI staging criteria for contrast nephropathy — when to start RRT?&rdquo;</span>
+        <span class="recent-meta">07:06 &middot; Pillai scoped &middot; 4 sources</span>
+      </div>
+      <div class="recent-item">
+        <span style="font-size:14px;">🎤</span>
+        <span class="recent-q">&ldquo;ELSO criteria for VA-ECMO in fulminant myocarditis&rdquo;</span>
+        <span class="recent-meta">07:04 &middot; Fatima scoped &middot; 3 sources &middot; via voice</span>
+      </div>
+      <div class="recent-item">
+        <span style="font-size:14px;">🔎</span>
+        <span class="recent-q">&ldquo;Ticagrelor hold timing before CABG — ESC vs ACC/AHA&rdquo;</span>
+        <span class="recent-meta">06:58 &middot; Rao scoped &middot; 2 sources</span>
+      </div>
+    </div>
+
+    <!-- Corpus stats -->
+    <div style="margin-top:var(--space-xl); padding:var(--space-md); background:var(--color-info-bg); border-radius:var(--radius-md); font-size:var(--font-xs); color:var(--color-text-secondary); display:flex; gap:var(--space-lg); flex-wrap:wrap;">
+      <span><strong>Corpus:</strong> 342 documents indexed</span>
+      <span><strong>Guidelines:</strong> KDIGO, ESC, ACC/AHA, NICE, ELSO, Surviving Sepsis Campaign</span>
+      <span><strong>Drug refs:</strong> BNF 82, openFDA, DrugBank, Aster formulary v8.2</span>
+      <span><strong>Protocols:</strong> 28 Aster Medcity internal pathways</span>
+      <span><strong>Embedding:</strong> all-MiniLM-L6-v2 (on-prem)</span>
+      <span><strong>LLM:</strong> Ollama local (demo) / Claude (cloud opt-in)</span>
+    </div>
+
+  </main>
+</div>
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'Evidence-based clinical reference. Ask a question and get a cited answer scoped to your patient.'
+};
+var TOUR_STEPS = [
+  {
+    target: '.rag-input-row',
+    title: 'Ask a clinical question',
+    body: 'Type or use voice. OmniSense searches guidelines, drug references, hospital protocols, and published evidence.',
+    position: 'bottom'
+  },
+  {
+    target: '.ai-bubble',
+    title: 'Cited answer with patient context',
+    body: 'The answer applies the evidence directly to your patient. <strong>Mr. Pillai meets KDIGO Stage 1</strong> based on his creatinine rise. Every claim links to a source.',
+    position: 'right'
+  },
+  {
+    target: '.source-card',
+    title: 'Source cards',
+    body: 'Each source shows the document, relevant section, match percentage, and when it was indexed. Tap to expand the full excerpt.',
+    position: 'top'
+  },
+  {
+    target: '.recent-list',
+    title: 'Query history',
+    body: 'Your recent lookups this shift. Tap any to re-run. Voice queries are marked with a mic icon.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

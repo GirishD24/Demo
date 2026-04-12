@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M11 — Patients tab · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+<style>
+  .patients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-md);
+  }
+  .pt-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    transition: all 150ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pt-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .pt-card-critical { border-left: 6px solid var(--color-critical); }
+  .pt-card-warning  { border-left: 6px solid var(--color-warning); }
+  .pt-card-stable   { border-left: 6px solid var(--color-stable); }
+
+  .pt-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pt-bed {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    width: 52px;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .pt-name {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .pt-age {
+    font-size: var(--font-sm);
+    color: var(--color-text-muted);
+  }
+  .pt-dx {
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+  }
+  .pt-concern {
+    font-size: var(--font-sm);
+    color: var(--color-text);
+  }
+  .pt-concern strong { color: var(--color-critical); font-weight: 600; }
+  .pt-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    font-size: var(--font-xs);
+    color: var(--color-text-muted);
+  }
+  .traj {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 600;
+  }
+  .traj-declining { background: var(--color-critical-bg); color: var(--color-critical); }
+  .traj-stable    { background: var(--color-warning-bg); color: #6D4C00; }
+  .traj-improving { background: var(--color-stable-bg); color: var(--color-stable); }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    font-family: inherit;
+  }
+  .filter-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+  .sort-select {
+    margin-left: auto;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-xs);
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity &middot; Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU &middot; Cardiologist &middot; D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab tab-active">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Your patients</h1>
+        <p class="page-subtitle">11 patients &middot; CICU + Cardiac Surgical Step-Down &middot; 11 April 2026</p>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active">All &middot; 11</button>
+      <button class="filter-btn">Declining &middot; 1</button>
+      <button class="filter-btn">Stable &middot; 4</button>
+      <button class="filter-btn">Improving &middot; 6</button>
+      <button class="filter-btn">Alerts &middot; 5</button>
+      <select class="sort-select">
+        <option>Sort by: acuity (highest first)</option>
+        <option>Sort by: bed number</option>
+        <option>Sort by: admission date</option>
+        <option>Sort by: trajectory</option>
+      </select>
+    </div>
+
+    <div id="patients-grid" class="patients-grid">
+
+      <!-- Fatima -->
+      <div class="pt-card pt-card-critical">
+        <div class="pt-header">
+          <div class="pt-bed">1</div>
+          <div>
+            <div class="pt-name">Ms. Fatima Rahman</div>
+            <div class="pt-age">28F &middot; CICU</div>
+          </div>
+          <span class="badge badge-critical" style="margin-left:auto;">3 alerts</span>
+        </div>
+        <div class="pt-dx">Acute viral myocarditis &middot; cardiogenic shock</div>
+        <div class="pt-concern"><strong>EF 28 &rarr; 22</strong> &middot; ECMO decision pending &middot; norad + dobutamine</div>
+        <div class="pt-footer">
+          <span class="traj traj-declining">&darr; Declining</span>
+          <span>Admitted 04:18 today</span>
+          <span>Echo 06:42</span>
+        </div>
+      </div>
+
+      <!-- Pillai -->
+      <div class="pt-card pt-card-warning">
+        <div class="pt-header">
+          <div class="pt-bed">12</div>
+          <div>
+            <div class="pt-name">Mr. Sasi Pillai</div>
+            <div class="pt-age">62M &middot; CICU</div>
+          </div>
+          <span class="badge badge-warning" style="margin-left:auto;">2 alerts</span>
+        </div>
+        <div class="pt-dx">Post-PCI STEMI day 2 &middot; LAD DES &middot; T2DM</div>
+        <div class="pt-concern"><strong>Cr 0.9 &rarr; 1.4</strong> &middot; metformin + ACE-i flagged for hold</div>
+        <div class="pt-footer">
+          <span class="traj traj-stable">&rarr; Stable</span>
+          <span>Admitted Tue 09 Apr</span>
+          <span>Trop down-trending</span>
+        </div>
+      </div>
+
+      <!-- Nair -->
+      <div class="pt-card pt-card-warning">
+        <div class="pt-header">
+          <div class="pt-bed">8</div>
+          <div>
+            <div class="pt-name">Mrs. Latha Nair</div>
+            <div class="pt-age">58F &middot; CICU</div>
+          </div>
+          <span class="badge badge-warning" style="margin-left:auto;">1 alert</span>
+        </div>
+        <div class="pt-dx">Decompensated HFrEF &middot; EF 25% &middot; milrinone + IV furosemide</div>
+        <div class="pt-concern">Lactate 4.1 &rarr; 2.3 (improving) &middot; <strong>LVAD vs transplant</strong> decision today</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>Day 4</span>
+          <span>HF round 09:00</span>
+        </div>
+      </div>
+
+      <!-- Krishnan -->
+      <div class="pt-card pt-card-warning">
+        <div class="pt-header">
+          <div class="pt-bed">3</div>
+          <div>
+            <div class="pt-name">Mr. Hari Krishnan</div>
+            <div class="pt-age">71M &middot; CICU</div>
+          </div>
+          <span class="badge badge-warning" style="margin-left:auto;">1 alert</span>
+        </div>
+        <div class="pt-dx">NSTEMI awaiting cath &middot; CKD eGFR 38 &middot; DAPT + heparin</div>
+        <div class="pt-concern">Cath tomorrow AM &middot; contrast nephropathy risk flagged</div>
+        <div class="pt-footer">
+          <span class="traj traj-stable">&rarr; Stable</span>
+          <span>Trop plateau 4.1</span>
+          <span>No chest pain x18h</span>
+        </div>
+      </div>
+
+      <!-- Rao -->
+      <div class="pt-card pt-card-warning">
+        <div class="pt-header">
+          <div class="pt-bed">SD-4</div>
+          <div>
+            <div class="pt-name">Mr. Venu Rao</div>
+            <div class="pt-age">68M &middot; Step-Down</div>
+          </div>
+          <span class="badge badge-warning" style="margin-left:auto;">Pre-op</span>
+        </div>
+        <div class="pt-dx">Pre-op CABG x3 &middot; 3VD &middot; T2DM HbA1c 8.4 &middot; mild AS</div>
+        <div class="pt-concern">OT 07:30 tomorrow &middot; awaiting your clearance sign-off</div>
+        <div class="pt-footer">
+          <span class="traj traj-stable">&rarr; Stable</span>
+          <span>Ticagrelor held 35h</span>
+          <span>Anaesthesia: Dr. Joseph</span>
+        </div>
+      </div>
+
+      <!-- George -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">5</div>
+          <div>
+            <div class="pt-name">Mr. K. George</div>
+            <div class="pt-age">64M &middot; CICU</div>
+          </div>
+        </div>
+        <div class="pt-dx">Post-PCI day 4 &middot; troponin trending down</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>For step-down today</span>
+        </div>
+      </div>
+
+      <!-- Varghese -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">6</div>
+          <div>
+            <div class="pt-name">Mr. A. Varghese</div>
+            <div class="pt-age">71M &middot; CICU</div>
+          </div>
+        </div>
+        <div class="pt-dx">Atrial fibrillation rate-controlled &middot; CHADS 4</div>
+        <div class="pt-footer">
+          <span class="traj traj-stable">&rarr; Stable</span>
+          <span>Awaiting anticoag plan</span>
+        </div>
+      </div>
+
+      <!-- Joseph -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">9</div>
+          <div>
+            <div class="pt-name">Mrs. P. Joseph</div>
+            <div class="pt-age">55F &middot; CICU</div>
+          </div>
+        </div>
+        <div class="pt-dx">NSTEMI day 3 &middot; medical management</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>For step-down tomorrow</span>
+        </div>
+      </div>
+
+      <!-- Iyer -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">11</div>
+          <div>
+            <div class="pt-name">Mr. R. Iyer</div>
+            <div class="pt-age">59M &middot; CICU</div>
+          </div>
+        </div>
+        <div class="pt-dx">Pericarditis &middot; ibuprofen + colchicine &middot; pain controlled</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>Echo unchanged</span>
+        </div>
+      </div>
+
+      <!-- Mathew -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">SD-2</div>
+          <div>
+            <div class="pt-name">Mr. T. Mathew</div>
+            <div class="pt-age">70M &middot; Step-Down</div>
+          </div>
+        </div>
+        <div class="pt-dx">POD-3 CABG x4 &middot; ambulating well</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>Chest tube removal today</span>
+        </div>
+      </div>
+
+      <!-- Thomas -->
+      <div class="pt-card pt-card-stable">
+        <div class="pt-header">
+          <div class="pt-bed">SD-7</div>
+          <div>
+            <div class="pt-name">Mr. J. Thomas</div>
+            <div class="pt-age">66M &middot; Step-Down</div>
+          </div>
+        </div>
+        <div class="pt-dx">POD-5 AVR mechanical &middot; INR 2.4</div>
+        <div class="pt-footer">
+          <span class="traj traj-improving">&uarr; Improving</span>
+          <span>Discharge home tomorrow</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'All 11 patients as cards. Tap any card to open the patient drawer (Summary, Journey, Body tabs).'
+};
+
+var TOUR_STEPS = [
+  {
+    target: '.filter-row',
+    title: 'Filter and sort',
+    body: 'Filter by trajectory (declining, stable, improving) or by active alerts. Sort by acuity, bed number, or admission date.',
+    position: 'bottom'
+  },
+  {
+    target: '.pt-card-critical',
+    title: 'Critical patients stand out',
+    body: 'Red left border and alert badges draw your eye to <strong>Ms. Fatima</strong>. Tap her card to open the patient drawer with Summary, Journey, and Body tabs.',
+    position: 'right'
+  },
+  {
+    target: '.pt-card-stable',
+    title: 'Stable patients are compact',
+    body: 'Green border, no alert badge, less detail. You can see at a glance that these patients are on track.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>

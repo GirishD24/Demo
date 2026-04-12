@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+<style>
+  .welcome-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .welcome-header {
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .welcome-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .welcome-logo span { color: #546E7A; font-weight: 400; }
+  .welcome-hospital {
+    padding: 6px 16px;
+    background: var(--color-primary-bg);
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+
+  .welcome-hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+  .welcome-content {
+    max-width: 800px;
+    text-align: center;
+  }
+  .welcome-tagline {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .welcome-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+  .welcome-subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  .welcome-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+  .welcome-card {
+    background: var(--color-primary-bg);
+    border: 1px solid #B2DFDB;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .welcome-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 8px;
+  }
+  .welcome-card-body {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .welcome-note {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .welcome-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: all 200ms ease;
+    box-shadow: var(--shadow-md);
+  }
+  .welcome-cta:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .welcome-cta svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .welcome-footer {
+    padding: 24px 48px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .welcome-cards { grid-template-columns: 1fr; }
+    .welcome-title { font-size: 26px; }
+    .welcome-header, .welcome-hero { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="welcome-page">
+
+  <div class="welcome-header">
+    <div class="welcome-logo">OmniSense<span> Clinical</span></div>
+    <div class="welcome-hospital">Aster Medcity, Kochi</div>
+  </div>
+
+  <div class="welcome-hero">
+    <div class="welcome-content">
+
+      <div class="welcome-tagline">AI Intelligence Platform for Hospitals</div>
+      <h1 class="welcome-title">Voice-driven shift briefing and clinical intelligence for physicians</h1>
+      <p class="welcome-subtitle">
+        OmniSense helps doctors start their shift faster. Press a button, ask
+        "How does my day look?", and hear a prioritised briefing across all your patients
+        with overnight changes, pending actions, and drug-safety flags.
+      </p>
+
+      <div class="welcome-cards">
+        <div class="welcome-card">
+          <div class="welcome-card-title">Voice briefing</div>
+          <div class="welcome-card-body">
+            Press the mic, ask a question, hear the answer. All 11 patients
+            covered in 60 seconds with priority ranking and what changed overnight.
+          </div>
+        </div>
+        <div class="welcome-card">
+          <div class="welcome-card-title">Patient deep-dive</div>
+          <div class="welcome-card-body">
+            Tap any patient to see their journey timeline, lab trends,
+            anatomical body view, and active drug-safety flags.
+          </div>
+        </div>
+        <div class="welcome-card">
+          <div class="welcome-card-title">Knowledge lookup</div>
+          <div class="welcome-card-body">
+            Ask a clinical question and get a cited answer from guidelines,
+            drug references, and hospital protocols, scoped to your patient.
+          </div>
+        </div>
+      </div>
+
+      <div class="welcome-note">
+        This demo shows the doctor's view only. Nurse, registrar, and admin views
+        are role-gated and shown separately.
+      </div>
+
+      <a href="01-briefing-landing.html" class="welcome-cta">
+        Start the guided demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="welcome-footer">
+    OmniSense Clinical by InterseQt &middot; Confidential &middot; Synthetic patient data only
+  </div>
+
+</div>
+
+<script>
+var PASS_KEY = 'omnisense_demo_auth';
+var PASS_CODE = 'AsterDemo2026';
+if (sessionStorage.getItem(PASS_KEY) !== 'true') {
+  document.querySelector('.welcome-page').style.display = 'none';
+  var gate = document.createElement('div');
+  gate.className = 'password-gate';
+  gate.innerHTML =
+    '<div class="password-card">' +
+      '<div class="password-logo">OmniSense<span> Clinical</span></div>' +
+      '<h1>Demo access</h1>' +
+      '<p>Enter the access code shared with you to view the guided demo.</p>' +
+      '<input class="password-input" type="password" placeholder="Access code" id="pw-input" autocomplete="off"/>' +
+      '<button class="password-submit" id="pw-submit">Enter</button>' +
+      '<div class="password-error" id="pw-error">Incorrect code. Please try again.</div>' +
+    '</div>';
+  document.body.appendChild(gate);
+  var input = document.getElementById('pw-input');
+  var error = document.getElementById('pw-error');
+  function tryAuth() {
+    if (input.value === PASS_CODE) {
+      sessionStorage.setItem(PASS_KEY, 'true');
+      gate.remove();
+      document.querySelector('.welcome-page').style.display = 'flex';
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  }
+  document.getElementById('pw-submit').addEventListener('click', tryAuth);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
+  input.focus();
+}
+</script>
+</body>
+</html>

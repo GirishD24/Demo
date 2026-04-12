@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M2 — Shift-start briefing · OmniSense Clinical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mockups.css">
+<link rel="stylesheet" href="tour.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">OmniSense<span class="brand-mark">Clinical</span></div>
+      <div class="hospital-pill">Aster Medcity · Kochi</div>
+    </div>
+    <div class="topbar-right">
+      <div class="user-block">
+        <span class="user-name">Dr. Rajesh Menon</span>
+        <span class="user-meta">CICU · Cardiologist · D001</span>
+      </div>
+      <div class="user-avatar">RM</div>
+    </div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tab tab-active">
+      <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      Briefing
+    </div>
+    <div class="tab">Rounds</div>
+    <div class="tab">Patients</div>
+    <div class="tab">Knowledge</div>
+  </nav>
+
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Shift briefing</h1>
+        <p class="page-subtitle">11 April 2026 · 07:02 · Generated 22 sec ago · 11 patients · 4 priority</p>
+      </div>
+      <div style="display:flex; gap:var(--space-sm); align-items:center;">
+        <button class="btn btn-secondary btn-sm">Replay audio</button>
+        <button class="btn btn-secondary btn-sm">Export to handoff</button>
+        <button class="mic-fab" title="Press and hold to ask a follow-up">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Doctor's voice turn -->
+    <div class="doctor-bubble">
+      <div class="doctor-bubble-icon">RM</div>
+      <div class="doctor-bubble-text">&ldquo;How does my day look?&rdquo;</div>
+      <span style="margin-left:auto; font-size:var(--font-xs); color:var(--color-text-muted);">07:01:38 · 1.4s</span>
+    </div>
+
+    <!-- AI conversational narrative -->
+    <div class="ai-bubble" id="ai-briefing">
+      <div class="ai-bubble-header">
+        <div class="ai-bubble-icon">AI</div>
+        <span>OmniSense · shift briefing</span>
+        <!-- Audio playback control -->
+        <div id="audio-control" style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+          <button id="audio-btn" onclick="toggleAudio()" style="display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:#00796B; color:white; border:none; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit;">
+            <svg id="audio-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg id="audio-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="white" style="display:none;"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            <span id="audio-label">Listen</span>
+          </button>
+          <div id="audio-status" style="font-size:11px; color:var(--color-text-muted); font-weight:400; display:none; align-items:center;">
+            <span id="audio-status-text">Speaking...</span>
+            <span id="audio-waveform" style="display:inline-flex; align-items:center; gap:2px; margin-left:4px; height:14px; vertical-align:middle;">
+              <span style="display:inline-block; width:2px; background:#00796B; border-radius:1px; animation:waveform 0.8s ease-in-out infinite;"></span>
+              <span style="display:inline-block; width:2px; background:#00796B; border-radius:1px; animation:waveform 0.8s ease-in-out infinite 0.1s;"></span>
+              <span style="display:inline-block; width:2px; background:#00796B; border-radius:1px; animation:waveform 0.8s ease-in-out infinite 0.2s;"></span>
+              <span style="display:inline-block; width:2px; background:#00796B; border-radius:1px; animation:waveform 0.8s ease-in-out infinite 0.3s;"></span>
+              <span style="display:inline-block; width:2px; background:#00796B; border-radius:1px; animation:waveform 0.8s ease-in-out infinite 0.15s;"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="ai-bubble-body" id="ai-text">
+        Good morning Dr. Menon. You have <strong>11 cardiac patients</strong> today across CICU and the
+        cardiac surgical step-down. <strong>Four need your attention this morning.</strong>
+        <br><br>
+        <strong>Mr. Pillai in bed 12</strong> &mdash; your STEMI from Tuesday &mdash; his creatinine
+        bumped from <strong>0.9 to 1.4</strong> overnight. Most likely contrast nephropathy from yesterday&rsquo;s
+        cath, and he&rsquo;s still on the ACE-i and metformin.
+        <br><br>
+        <strong>Mrs. Nair in bed 8</strong> &mdash; your decomp heart failure on milrinone &mdash; her lactate has
+        come down from 4.1 to 2.3 over the last 24 hours, but the milrinone wean isn&rsquo;t going as
+        planned and she&rsquo;s still pretty volume-overloaded. The advanced HF team wants to talk
+        about <strong>LVAD versus transplant referral</strong> this morning.
+        <br><br>
+        <strong>Ms. Fatima in bed 1</strong> &mdash; the 28-year-old myocarditis admission from last night &mdash;
+        her EF dropped from <strong>28 to 22</strong> on the morning echo. She&rsquo;s on low-dose noradrenaline
+        and dobutamine, and the ECMO team is asking <strong>whether to cannulate now or wait
+        another four hours</strong>.
+        <br><br>
+        <strong>Mr. Krishnan in bed 3</strong> goes to the cath lab tomorrow &mdash; his eGFR is 38, so I want to
+        flag the contrast load. And <strong>Mr. Rao</strong> is your CABG case for tomorrow morning &mdash;
+        anaesthesia wants clearance on his anti-platelet hold.
+        <br><br>
+        The other six are stable. <em>What do you want to tackle first?</em>
+      </div>
+      <div class="ai-bubble-meta">
+        <span>Sources: Patient context bundles &times; 11 · Drug-safety pipeline run · 0 hallucination flags</span>
+        <span style="margin-left:auto;">Fully audited &middot; ID brf_20260411_0701</span>
+      </div>
+    </div>
+
+    <!-- Text handoff (collapsible) -->
+    <div id="handoff-toggle" style="margin-top:var(--space-md);">
+      <button onclick="document.getElementById('handoff-body').style.display = document.getElementById('handoff-body').style.display === 'none' ? 'block' : 'none'; this.querySelector('.toggle-arrow').textContent = document.getElementById('handoff-body').style.display === 'none' ? '\u25B6' : '\u25BC';" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); cursor:pointer; font-size:var(--font-sm); font-weight:600; color:var(--color-text-secondary); font-family:inherit; width:100%; text-align:left;">
+        <span class="toggle-arrow">&#9660;</span>
+        View as text (I-PASS handoff from Dr. Anand)
+      </button>
+      <div id="handoff-body" style="display:block; margin-top:8px; padding:var(--space-lg); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm); line-height:1.7;">
+        <div style="display:grid; grid-template-columns:80px 1fr; gap:var(--space-sm) var(--space-lg); margin-bottom:var(--space-md);">
+          <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700; letter-spacing:0.8px;">Illness</div>
+          <div><span class="badge badge-critical">Watcher x1</span> <span class="badge badge-warning" style="margin-left:4px;">Unstable x3</span> <span class="badge badge-stable" style="margin-left:4px;">Stable x7</span></div>
+
+          <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Watcher</div>
+          <div><strong>Bed 1 Ms. Fatima Rahman, 28F</strong> Acute viral myocarditis, cardiogenic shock. EF 28&rarr;22 on AM echo. On norad 0.08 + dobutamine 5. ECMO team at bedside.</div>
+
+          <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Unstable</div>
+          <div>
+            <strong>Bed 12 Mr. Pillai, 62M</strong> Post-PCI STEMI day 2. Cr 0.9&rarr;1.4. Still on ACE-i + metformin.<br>
+            <strong>Bed 8 Mrs. Nair, 58F</strong> Decomp HFrEF EF 25, milrinone + IV furosemide. Lactate 4.1&rarr;2.3, wean stalled. HF team 09:00.<br>
+            <strong>Bed 3 Mr. Krishnan, 71M</strong> NSTEMI awaiting cath, eGFR 38. Cath booked tomorrow AM.
+          </div>
+
+          <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Pre-op</div>
+          <div><strong>SD-4 Mr. Rao, 68M</strong> CABG x3 tomorrow 07:30. 3VD, mild AS. Ticagrelor held since 10 Apr 20:00. Awaiting written sign-off.</div>
+
+          <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700;">Stable</div>
+          <div style="color:var(--color-text-secondary);">Bed 5 K. George (post-PCI day 4) &middot; Bed 6 A. Varghese (AF rate-controlled) &middot; Bed 9 P. Joseph (NSTEMI day 3) &middot; Bed 11 R. Iyer (pericarditis) &middot; SD-2 T. Mathew (POD-3 CABG) &middot; SD-7 J. Thomas (POD-5 AVR)</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    var isSpeaking = false;
+    var speakId = 0;
+    var sentences = [];
+    var currentIdx = 0;
+    var preferredVoice = null;
+
+    var ABBREVS = [
+      [/\bDr\./g, 'Doctor'], [/\bMr\./g, 'Mister'], [/\bMrs\./g, 'Missus'],
+      [/\bMs\./g, 'Miss'], [/\bSt\./g, 'Saint'], [/\be\.g\./g, 'for example'],
+      [/\bi\.e\./g, 'that is'], [/\bvs\./g, 'versus'], [/\beGFR\b/g, 'E G F R'],
+      [/\bACE-i\b/g, 'ace inhibitor'], [/\bEF\b/g, 'E F'], [/\bLVAD\b/g, 'L VAD'],
+      [/\bCABG\b/g, 'cabbage']
+    ];
+
+    function toggleAudio() {
+      if (isSpeaking) {
+        speakId++;
+        speechSynthesis.cancel();
+        setUI(false);
+        // currentIdx stays where it is so resume picks up from here
+        return;
+      }
+
+      // First play or resume
+      if (sentences.length === 0 || currentIdx >= sentences.length) {
+        // Fresh start: parse text and reset
+        var text = document.getElementById('ai-text').innerText;
+        var safe = ABBREVS.reduce(function(t, p) { return t.replaceAll(p[0], p[1]); }, text);
+        sentences = safe.match(/[^.!?]+[.!?]+/g) || [safe];
+        currentIdx = 0;
+
+        var voices = speechSynthesis.getVoices();
+        preferredVoice =
+          voices.find(function(v) { return v.lang === 'en-IN'; }) ||
+          voices.find(function(v) { return /india|neerja|rishi/i.test(v.name) && v.lang.indexOf('en') === 0; }) ||
+          voices.find(function(v) { return v.lang === 'en-GB'; }) ||
+          voices.find(function(v) { return v.lang.indexOf('en') === 0; });
+      }
+      // else: resume from currentIdx
+
+      setUI(true);
+      speakNext();
+    }
+
+    function speakNext() {
+      if (currentIdx >= sentences.length) { setUI(false); return; }
+      var myId = ++speakId;
+      setTimeout(function() {
+        if (speakId !== myId) return;
+        var u = new SpeechSynthesisUtterance(sentences[currentIdx].trim());
+        u.rate = 0.95;
+        u.pitch = 1;
+        u.volume = 1;
+        u.lang = 'en-IN';
+        if (preferredVoice) u.voice = preferredVoice;
+        u.onend = function() {
+          if (speakId !== myId) return;
+          currentIdx++;
+          speakNext();
+        };
+        u.onerror = function() {
+          if (speakId !== myId) return;
+          setUI(false);
+        };
+        speechSynthesis.speak(u);
+      }, 50);
+    }
+
+    function setUI(playing) {
+      isSpeaking = playing;
+      var paused = !playing && currentIdx > 0 && currentIdx < sentences.length;
+      document.getElementById('audio-label').textContent = playing ? 'Stop' : (paused ? 'Resume' : 'Listen');
+      document.getElementById('audio-icon-play').style.display = playing ? 'none' : 'block';
+      document.getElementById('audio-icon-pause').style.display = playing ? 'block' : 'none';
+      document.getElementById('audio-btn').style.background = playing ? '#D32F2F' : '#00796B';
+      document.getElementById('audio-status').style.display = playing ? 'inline-flex' : 'none';
+    }
+
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = function() {};
+    }
+    </script>
+
+    <h2 style="margin-top:var(--space-xl); margin-bottom:var(--space-md); font-size:var(--font-xl); font-weight:600; display:flex; align-items:center; gap:10px;">
+      <span style="width:6px; height:24px; background:var(--color-critical); border-radius:3px;"></span>
+      Priority &mdash; 5 patients &middot; 13 actions
+    </h2>
+
+    <div class="action-summary">
+      <span style="font-weight:600; color:var(--color-text);">Action queue</span>
+      <span class="action-summary-pill" style="background:#FFF8E1; color:#6D4C00;"><span class="dot" style="background:#F57F17;"></span>8 pending</span>
+      <span class="action-summary-pill" style="background:#E3F2FD; color:#1565C0;"><span class="dot" style="background:#1565C0;"></span>2 acknowledged</span>
+      <span class="action-summary-pill" style="background:#E8F5E9; color:#2E7D32;"><span class="dot" style="background:#2E7D32;"></span>2 done</span>
+      <span style="margin-left:auto; font-size:var(--font-xs); color:var(--color-text-muted);">
+        Auto-resolves from <strong>Aster EMR</strong> (HL7 ORM) &middot; voice mark-done supported
+      </span>
+    </div>
+
+    <div class="priority-list">
+
+      <!-- Fatima — most critical -->
+      <div class="patient-card patient-card-critical">
+        <div class="patient-bed-block">
+          <div class="patient-bed-num">1</div>
+          <div class="patient-bed-label">CICU</div>
+        </div>
+        <div class="patient-body">
+          <div class="patient-name-row">
+            <span class="patient-name">Ms. Fatima Rahman, 28F</span>
+            <span class="badge badge-critical">Crashing</span>
+            <span class="badge badge-outline">ECMO decision pending</span>
+            <span style="margin-left:auto; display:flex; gap:6px;">
+              <button class="btn btn-primary btn-sm">Open</button>
+              <button class="btn btn-ghost btn-sm">Ask AI</button>
+            </span>
+          </div>
+          <div class="patient-dx">Acute viral myocarditis · cardiogenic shock · noradrenaline + dobutamine</div>
+          <div class="patient-concern"><strong>EF dropped 28 &rarr; 22</strong> on this morning&rsquo;s echo · trop 14.2 · BP 88/52 · ECMO team activated</div>
+          <div class="patient-meta-row">
+            <span>Admitted 04:18 · 2h 44m ago</span>
+            <span>Echo at 06:42</span>
+            <span>3 active alerts</span>
+          </div>
+
+          <div class="action-list">
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>VA-ECMO cannulation decision</strong> &mdash; Dr. Krishnamurthy + perfusion at bedside</span>
+              <span class="action-meta">flagged 06:48</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-acknowledged">
+              <span class="action-status action-status-ack">👁</span>
+              <span class="action-text">Family update &mdash; husband + parents at unit</span>
+              <span class="action-meta">ack by Dr. Anand 06:30</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-done">
+              <span class="action-status action-status-done">✓</span>
+              <span class="action-text">IVIG 2g/kg prepared in pharmacy</span>
+              <span class="action-meta"><span class="auto-badge">auto · EMR 05:42</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillai -->
+      <div class="patient-card patient-card-warning">
+        <div class="patient-bed-block">
+          <div class="patient-bed-num">12</div>
+          <div class="patient-bed-label">CICU</div>
+        </div>
+        <div class="patient-body">
+          <div class="patient-name-row">
+            <span class="patient-name">Mr. Sasi Pillai, 62M</span>
+            <span class="badge badge-warning">AKI rising</span>
+            <span class="badge badge-outline">Drug-safety flag</span>
+            <span style="margin-left:auto; display:flex; gap:6px;">
+              <button class="btn btn-primary btn-sm">Open</button>
+              <button class="btn btn-ghost btn-sm">Ask AI</button>
+            </span>
+          </div>
+          <div class="patient-dx">Post-PCI STEMI day 2 · LAD stent · T2DM 15y · smoker</div>
+          <div class="patient-concern"><strong>Creatinine 0.9 &rarr; 1.4 overnight.</strong> Still on ACE-i + metformin. Likely contrast nephropathy.</div>
+          <div class="patient-meta-row">
+            <span>PCI Tue 14:20</span>
+            <span>BP 138/82</span>
+            <span>Last troponin: down-trending</span>
+          </div>
+
+          <div class="action-list">
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>Hold metformin 1g BD</strong> &mdash; eGFR 42, below 45 cut-off</span>
+              <span class="action-meta">flagged 06:52</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>Hold ramipril 5mg</strong> 24h &mdash; ACE-i in evolving AKI</span>
+              <span class="action-meta">flagged 06:52</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text">Start <strong>NaHCO3 hydration 1mL/kg/h</strong> &middot; CIN prevention</span>
+              <span class="action-meta">KDIGO 1.2</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text">Repeat U&amp;E + creatinine at noon</span>
+              <span class="action-meta">scheduled 12:00</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nair -->
+      <div class="patient-card patient-card-warning">
+        <div class="patient-bed-block">
+          <div class="patient-bed-num">8</div>
+          <div class="patient-bed-label">CICU</div>
+        </div>
+        <div class="patient-body">
+          <div class="patient-name-row">
+            <span class="patient-name">Mrs. Latha Nair, 58F</span>
+            <span class="badge badge-warning">Wean stalled</span>
+            <span class="badge badge-outline">HF team consult 09:00</span>
+            <span style="margin-left:auto; display:flex; gap:6px;">
+              <button class="btn btn-primary btn-sm">Open</button>
+              <button class="btn btn-ghost btn-sm">Ask AI</button>
+            </span>
+          </div>
+          <div class="patient-dx">Decompensated HFrEF · EF 25% · milrinone + IV furosemide</div>
+          <div class="patient-concern"><strong>Lactate 4.1 &rarr; 2.3</strong> (good) but volume-overloaded. <strong>LVAD vs transplant</strong> decision today.</div>
+          <div class="patient-meta-row">
+            <span>Day 4 of cardiogenic shock</span>
+            <span>UO 32 mL/h</span>
+            <span>K 4.6 · Mg 2.1</span>
+          </div>
+
+          <div class="action-list">
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>LVAD vs transplant referral</strong> &mdash; advanced HF round 09:00 with Dr. Krishnamurthy</span>
+              <span class="action-meta">in 1h 58m</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-acknowledged">
+              <span class="action-status action-status-ack">👁</span>
+              <span class="action-text">Continue milrinone wean per protocol &middot; reassess at noon</span>
+              <span class="action-meta">ack by Dr. Anand 19:30</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Krishnan -->
+      <div class="patient-card patient-card-warning">
+        <div class="patient-bed-block">
+          <div class="patient-bed-num">3</div>
+          <div class="patient-bed-label">CICU</div>
+        </div>
+        <div class="patient-body">
+          <div class="patient-name-row">
+            <span class="patient-name">Mr. Hari Krishnan, 71M</span>
+            <span class="badge badge-warning">Pre-cath risk</span>
+            <span class="badge badge-outline">CKD 3</span>
+            <span style="margin-left:auto; display:flex; gap:6px;">
+              <button class="btn btn-primary btn-sm">Open</button>
+              <button class="btn btn-ghost btn-sm">Ask AI</button>
+            </span>
+          </div>
+          <div class="patient-dx">NSTEMI awaiting cath · CKD eGFR 38 · DAPT + heparin · frail</div>
+          <div class="patient-concern">Cath booked tomorrow AM. <strong>Contrast nephropathy risk &mdash; flag for hydration protocol + minimum-volume strategy.</strong></div>
+          <div class="patient-meta-row">
+            <span>Trop plateau 4.1</span>
+            <span>HR 78 SR</span>
+            <span>No fresh chest pain x18h</span>
+          </div>
+
+          <div class="action-list">
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text">Confirm cath lab booking &middot; tomorrow 09:00 slot</span>
+              <span class="action-meta">cath lab pager 5012</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>Write CIN prevention orders</strong> &middot; NaHCO3 1mL/kg/h from 04:00 + hold metformin 24h pre-cath</span>
+              <span class="action-meta">Aster CIN pathway v2.1</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rao -->
+      <div class="patient-card patient-card-warning">
+        <div class="patient-bed-block">
+          <div class="patient-bed-num">SD-4</div>
+          <div class="patient-bed-label">Step-Dn</div>
+        </div>
+        <div class="patient-body">
+          <div class="patient-name-row">
+            <span class="patient-name">Mr. Venu Rao, 68M</span>
+            <span class="badge badge-warning">Pre-op clearance</span>
+            <span class="badge badge-outline">Anaesthesia waiting</span>
+            <span style="margin-left:auto; display:flex; gap:6px;">
+              <button class="btn btn-primary btn-sm">Open</button>
+              <button class="btn btn-ghost btn-sm">Ask AI</button>
+            </span>
+          </div>
+          <div class="patient-dx">Pre-op CABG x3 tomorrow · T2DM HbA1c 8.4 · mild AS · CKD eGFR 52</div>
+          <div class="patient-concern">DAPT loaded 4 weeks ago. <strong>Anti-platelet hold timing + metformin/ACE-i hold</strong> needs your call this morning.</div>
+          <div class="patient-meta-row">
+            <span>Anaesthesia: Dr. Joseph</span>
+            <span>OT slot 07:30 tomorrow</span>
+            <span>HbA1c 8.4 (stable)</span>
+          </div>
+
+          <div class="action-list">
+            <div class="action-item action-pending">
+              <span class="action-status action-status-pending">⏳</span>
+              <span class="action-text"><strong>Sign pre-op clearance</strong> &middot; submit to Dr. Joseph (anaesthesia) by 09:00</span>
+              <span class="action-meta">deadline in 2h</span>
+              <div class="action-buttons">
+                <button class="btn-mini btn-mini-ack">Ack</button>
+                <button class="btn-mini btn-mini-done">Done</button>
+              </div>
+            </div>
+            <div class="action-item action-done">
+              <span class="action-status action-status-done">✓</span>
+              <span class="action-text">Ticagrelor held since 10 Apr 20:00 (35h pre-op, within ESC window)</span>
+              <span class="action-meta"><span class="auto-badge">auto · MAR 20:00</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stable list -->
+    <div id="stable-section" class="stable-list" style="margin-top:var(--space-lg);">
+      <div class="stable-list-header">Stable overnight &mdash; 6 patients</div>
+      <div class="stable-row">
+        <span class="bed">CICU 5</span>
+        <span><span class="name">Mr. K. George, 64M</span> &middot; <span class="status">Post-PCI day 4 · troponin trending down · for step-down today</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+      <div class="stable-row">
+        <span class="bed">CICU 6</span>
+        <span><span class="name">Mr. A. Varghese, 71M</span> &middot; <span class="status">Atrial fibrillation rate-controlled · CHADS 4 · awaiting anticoag plan</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+      <div class="stable-row">
+        <span class="bed">CICU 9</span>
+        <span><span class="name">Mrs. P. Joseph, 55F</span> &middot; <span class="status">NSTEMI day 3 · medical management · for step-down tomorrow</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+      <div class="stable-row">
+        <span class="bed">CICU 11</span>
+        <span><span class="name">Mr. R. Iyer, 59M</span> &middot; <span class="status">Pericarditis on ibuprofen + colchicine · pain controlled · echo unchanged</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+      <div class="stable-row">
+        <span class="bed">SD-2</span>
+        <span><span class="name">Mr. T. Mathew, 70M</span> &middot; <span class="status">POD-3 CABG x4 · ambulating · for chest tube removal today</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+      <div class="stable-row">
+        <span class="bed">SD-7</span>
+        <span><span class="name">Mr. J. Thomas, 66M</span> &middot; <span class="status">POD-5 AVR mechanical · INR 2.4 · for discharge home tomorrow</span></span>
+        <span class="badge badge-stable">Stable</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script>
+var TOUR_CONFIG = {
+  pageDesc: 'After asking "How does my day look?" you hear and see the full shift briefing.'
+};
+var TOUR_STEPS = [
+  {
+    target: '.doctor-bubble',
+    title: 'Your voice command',
+    body: 'You asked <strong>"How does my day look?"</strong> and OmniSense responded with a full shift briefing across all 11 patients.',
+    position: 'bottom'
+  },
+  {
+    target: '#ai-briefing',
+    title: 'AI shift briefing',
+    body: 'A conversational narrative covering your priority patients, what changed overnight, and what needs your attention. Tap <strong>Listen</strong> to hear it read aloud.',
+    position: 'right'
+  },
+  {
+    target: '#handoff-toggle',
+    title: 'Text view',
+    body: 'Prefer reading? Expand this to see the same briefing as a structured I-PASS handoff document.',
+    position: 'bottom'
+  },
+  {
+    target: '.action-summary',
+    title: 'Action queue',
+    body: 'Every action across your patients in one place. Items resolve automatically when your registrar enters orders into the EMR, or you can mark them done by voice.',
+    position: 'bottom'
+  },
+  {
+    target: '.patient-card-critical',
+    title: 'Critical patient',
+    body: 'Red border and alert badges highlight <strong>Ms. Fatima</strong>. Each card shows the clinical concern and pending actions inline. Tap <strong>Open</strong> to see her full drawer.',
+    position: 'right'
+  },
+  {
+    target: '#stable-section',
+    title: 'Stable patients',
+    body: 'The 6 patients who had an uneventful night. Compact one-liners so they stay visible without cluttering your priority view.',
+    position: 'top'
+  }
+];
+</script>
+<script src="tour.js"></script>
+</body>
+</html>
