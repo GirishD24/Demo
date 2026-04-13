@@ -101,6 +101,28 @@
     </div>
 
   </main>
+
+  <!-- Voice overlay (hidden, shown during tour step) -->
+  <div id="voice-overlay-demo" class="voice-overlay" style="display:none;">
+    <div class="voice-card">
+      <div class="voice-status">Listening &middot; press and hold</div>
+      <button class="mic-fab mic-fab-large mic-listening">
+        <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg>
+      </button>
+      <div class="waveform">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+      <div class="voice-transcript">&ldquo;How does my day look?<span class="typing"></span>&rdquo;</div>
+      <div style="font-size:var(--font-xs); color:var(--color-text-muted); text-align:center; max-width:380px; line-height:1.5;">
+        Release the mic to submit your question. OmniSense will respond with a full shift briefing.
+      </div>
+      <div class="voice-actions">
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-primary">Release to send</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
 // Tour page config
@@ -119,8 +141,16 @@ var TOUR_STEPS = [
   {
     target: '.mic-fab-large',
     title: 'Talk to OmniSense',
-    body: 'Press and hold, then speak naturally — <em>"How does my day look?"</em> Release when you\'re done. OmniSense only listens while you hold the button.',
+    body: 'Press and hold, then speak naturally. Release when you are done. OmniSense only listens while you hold the button.',
     position: 'left'
+  },
+  {
+    target: '.voice-card',
+    title: 'Voice overlay',
+    body: 'This is what you see while holding the mic. Your words appear in real time. When you mention a patient, OmniSense confirms before acting. Release to submit.',
+    position: 'right',
+    onEnter: function() { document.getElementById('voice-overlay-demo').style.display = 'flex'; },
+    onLeave: function() { document.getElementById('voice-overlay-demo').style.display = 'none'; }
   },
   {
     target: '.page-title',

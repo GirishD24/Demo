@@ -52,7 +52,6 @@
     { url: '01-briefing-landing.html',      title: 'Briefing landing' },
     { url: '02-briefing-shift-start.html',  title: 'Shift briefing' },
     { url: '03-briefing-drilldown.html',    title: 'Drill-down' },
-    { url: '08-voice-overlay.html',         title: 'Voice overlay' },
     { url: '11-patients-tab.html',          title: 'Patients' },
     { url: '04-patient-drawer-pillai.html', title: 'Pillai drawer' },
     { url: '05-patient-drawer-fatima.html', title: 'Fatima drawer' },
@@ -139,6 +138,18 @@
   }
 
   function positionSpotlight(step) {
+    // Run onLeave for the previous step
+    if (currentStep > 0 && steps[currentStep - 1] && steps[currentStep - 1].onLeave) {
+      steps[currentStep - 1].onLeave();
+    }
+    // Also handle going backwards
+    if (currentStep < steps.length - 1 && steps[currentStep + 1] && steps[currentStep + 1].onLeave) {
+      steps[currentStep + 1].onLeave();
+    }
+
+    // Run onEnter for this step
+    if (step.onEnter) step.onEnter();
+
     var el = document.querySelector(step.target);
     if (!el) { nextStep(); return; }
 
@@ -244,6 +255,8 @@
   }
 
   function endTour() {
+    // Clean up any active step's onLeave
+    if (steps[currentStep] && steps[currentStep].onLeave) steps[currentStep].onLeave();
     if (ring) ring.style.display = 'none';
     if (tooltip) tooltip.style.display = 'none';
     // Enable the bottom nav bar
