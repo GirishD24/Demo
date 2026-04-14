@@ -257,6 +257,20 @@
   .lab-flag-h { color: var(--color-critical); font-weight: 700; }
   .lab-flag-l { color: var(--color-acknowledged); font-weight: 700; }
   .lab-flag-n { color: var(--color-stable); font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .journey-toolbar { flex-direction: column; }
+    .journey-search { min-width: 100%; }
+    .te-row { flex-wrap: wrap; gap: 4px; }
+    .te-time { width: auto; }
+    .te-detail { margin-left: 0; }
+    .modal { width: 95vw; }
+    .modal-header { padding: var(--space-md); }
+    .modal-body { padding: var(--space-md); }
+    .lab-table { font-size: var(--font-xs); }
+    .lab-table th, .lab-table td { padding: 6px 8px; }
+    .modal-footer { flex-direction: column; gap: var(--space-sm); }
+  }
 </style>
 </head>
 <body>

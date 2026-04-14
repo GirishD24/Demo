@@ -1080,3 +1080,97 @@ body {
   letter-spacing: 0.4px;
 }
 .mockup-banner a { color: var(--color-primary-dark); }
+
+/* ============ MOBILE RESPONSIVE ============ */
+
+@media (max-width: 768px) {
+  /* Topbar */
+  .topbar { padding: 0 var(--space-md); height: 56px; }
+  .hospital-pill { display: none; }
+  .user-block { display: none; }
+  .brand { font-size: var(--font-base); }
+
+  /* Tab bar */
+  .tabbar { padding: 0 var(--space-sm); gap: 0; overflow-x: auto; }
+  .tab { padding: var(--space-sm) var(--space-md); font-size: var(--font-sm); white-space: nowrap; }
+
+  /* Main content */
+  .main { padding: var(--space-md); }
+  .page-header { flex-direction: column; gap: var(--space-sm); }
+  .page-title { font-size: var(--font-xl); }
+  .page-subtitle { font-size: var(--font-sm); }
+
+  /* Cards */
+  .card { padding: var(--space-md); }
+
+  /* Patient cards */
+  .patient-card { flex-direction: column; gap: var(--space-sm); }
+  .patient-bed-block { flex-direction: row; width: auto; gap: var(--space-sm); }
+  .patient-bed-num { font-size: var(--font-lg); }
+  .patient-name { font-size: var(--font-base); }
+  .patient-name-row { flex-wrap: wrap; }
+  .patient-meta-row { flex-wrap: wrap; }
+
+  /* Tile grid */
+  .tile-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* AI bubble */
+  .ai-bubble { padding: var(--space-md); }
+  .ai-bubble-body { font-size: var(--font-sm); }
+  .ai-bubble-header { flex-wrap: wrap; gap: 6px; }
+
+  /* Doctor bubble */
+  .doctor-bubble { padding: var(--space-sm) var(--space-md); }
+
+  /* Drawer */
+  .drawer { width: 100vw; }
+  .drawer-header { padding: var(--space-md); }
+  .drawer-body { padding: var(--space-md); }
+  .drawer-tabs { padding: 0 var(--space-sm); }
+
+  /* Body view */
+  .body-view-container { grid-template-columns: 1fr; }
+  .organ-card { padding: var(--space-sm); }
+
+  /* Action items */
+  .action-item { flex-wrap: wrap; gap: 6px; }
+  .action-meta { width: 100%; }
+  .action-buttons { width: 100%; }
+  .action-summary { flex-wrap: wrap; }
+
+  /* Stable list */
+  .stable-row { grid-template-columns: 50px 1fr; gap: var(--space-sm); font-size: var(--font-xs); }
+  .stable-row .status { grid-column: 1 / -1; }
+
+  /* Voice overlay */
+  .voice-card { padding: var(--space-lg); width: 95vw; }
+  .voice-transcript { font-size: var(--font-lg); }
+  .mic-fab-large { width: 72px; height: 72px; }
+
+  /* KV list */
+  .kv-list { grid-template-columns: 1fr; }
+
+  /* Empty state */
+  .empty-state { padding: var(--space-lg) var(--space-md); }
+
+  /* Cite row */
+  .cite-row { gap: 4px; }
+  .cite { font-size: 10px; padding: 2px 8px; }
+}
+
+@media (max-width: 480px) {
+  .topbar { height: 48px; }
+  .brand { font-size: var(--font-sm); }
+  .user-avatar { width: 32px; height: 32px; font-size: var(--font-xs); }
+
+  .tab { padding: var(--space-xs) var(--space-sm); font-size: var(--font-xs); }
+  .tab-mic-icon { display: none; }
+
+  .page-title { font-size: var(--font-lg); }
+  .tile-grid { grid-template-columns: 1fr 1fr; }
+  .tile-value { font-size: var(--font-lg); }
+
+  .patient-card { padding: var(--space-sm) var(--space-md); }
+  .mic-fab-large { width: 64px; height: 64px; }
+  .voice-card { padding: var(--space-md); }
+}

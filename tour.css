@@ -302,3 +302,31 @@
 }
 
 body.tour-active { padding-bottom: 52px; }
+
+/* ============ MOBILE RESPONSIVE ============ */
+
+@media (max-width: 768px) {
+  /* Password gate */
+  .password-card { padding: 32px 24px; width: 90vw; }
+  .password-input { font-size: 14px; }
+
+  /* Spotlight tooltip */
+  .spotlight-tooltip { max-width: 280px; padding: 16px; }
+  .spotlight-tooltip-title { font-size: 13px; }
+  .spotlight-tooltip-body { font-size: 12px; }
+
+  /* Tour bar */
+  .tour-bar { padding: 8px 12px; gap: 8px; }
+  .tour-bar-title { font-size: 12px; }
+  .tour-bar-desc { display: none; }
+  .tour-bar-dots { display: none; }
+  .tour-bar-btn { padding: 6px 14px; font-size: 11px; }
+  .tour-bar-step { width: 24px; height: 24px; font-size: 11px; }
+  .tour-bar-of { font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .spotlight-tooltip { max-width: 240px; padding: 12px; }
+  .tour-bar-title { display: none; }
+  .password-card { padding: 24px 16px; }
+}
