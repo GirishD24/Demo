@@ -1124,13 +1124,29 @@ body {
 
   /* Drawer */
   .drawer { width: 100vw; }
-  .drawer-header { padding: var(--space-md); }
+  .drawer-header { padding: var(--space-sm) var(--space-md); }
   .drawer-body { padding: var(--space-md); }
   .drawer-tabs { padding: 0 var(--space-sm); }
+  .drawer-tab { padding: var(--space-sm) var(--space-md); font-size: var(--font-xs); }
+  .drawer-section-title { font-size: 10px; }
+  .drawer-close { position: absolute; right: 8px; top: 8px; }
 
   /* Body view */
   .body-view-container { grid-template-columns: 1fr; }
   .organ-card { padding: var(--space-sm); }
+  .organ-card[style*="grid-column: span 2"] { grid-column: span 1 !important; }
+  .organ-svg { max-width: 100% !important; }
+  .organ-callout { font-size: var(--font-xs); }
+
+  /* Footer action rows in drawers (reference + buttons) */
+  .drawer-body > div:last-child { flex-direction: column !important; align-items: stretch !important; }
+  .drawer-body .btn-sm { width: 100%; text-align: center; }
+
+  /* Badge rows in drawer headers */
+  .badge { font-size: 10px; padding: 2px 8px; }
+
+  /* Patients grid */
+  .patients-grid { grid-template-columns: 1fr !important; }
 
   /* Action items */
   .action-item { flex-wrap: wrap; gap: 6px; }
@@ -1139,8 +1155,10 @@ body {
   .action-summary { flex-wrap: wrap; }
 
   /* Stable list */
-  .stable-row { grid-template-columns: 50px 1fr; gap: var(--space-sm); font-size: var(--font-xs); }
-  .stable-row .status { grid-column: 1 / -1; }
+  .stable-list { overflow-x: hidden; }
+  .stable-row { grid-template-columns: 1fr; gap: 4px; font-size: var(--font-xs); padding: var(--space-sm) var(--space-md); }
+  .stable-row .bed { display: inline; }
+  .stable-row .badge { font-size: 9px; padding: 1px 6px; }
 
   /* Voice overlay */
   .voice-card { padding: var(--space-lg); width: 95vw; }

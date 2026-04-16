@@ -106,9 +106,15 @@
 
   @media (max-width: 768px) {
     .rounds-summary { grid-template-columns: repeat(2, 1fr); }
-    .round-row { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+    .rounds-stat-num { font-size: var(--font-xl); }
+    .round-row { flex-direction: column; align-items: flex-start; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); }
+    .round-bed { width: auto; font-size: var(--font-base); }
     .round-actions-col { min-width: 100%; }
+    .round-action-mini { flex-wrap: wrap; gap: 4px; }
+    .round-action-mini .auto-badge { font-size: 9px; padding: 1px 6px; }
     .round-status-col { flex-direction: row; align-items: center; gap: var(--space-sm); min-width: 100%; }
+    .round-seen-badge { font-size: 10px; }
+    .action-summary { flex-direction: column; align-items: flex-start; gap: 6px; }
   }
 </style>
 </head>

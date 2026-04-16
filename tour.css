@@ -349,9 +349,16 @@ body.tour-active { padding-bottom: 52px; }
   .password-input { font-size: 14px; }
 
   /* Spotlight tooltip */
-  .spotlight-tooltip { max-width: 280px; padding: 16px; }
-  .spotlight-tooltip-title { font-size: 13px; }
-  .spotlight-tooltip-body { font-size: 12px; }
+  .spotlight-tooltip { max-width: 260px; padding: 14px; }
+  .spotlight-tooltip-step { width: 22px; height: 22px; font-size: 11px; }
+  .spotlight-tooltip-title { font-size: 12px; }
+  .spotlight-tooltip-body { font-size: 11px; }
+  .spotlight-tooltip-nav { margin-top: 10px; padding-top: 8px; }
+  .spot-btn { padding: 5px 12px; font-size: 11px; }
+
+  /* Chevron arrows */
+  .tour-bar-arrows span { font-size: 16px; }
+  .tour-bar-arrows { margin-left: 4px; }
 
   /* Tour bar */
   .tour-bar { padding: 8px 12px; gap: 8px; }

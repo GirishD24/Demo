@@ -207,14 +207,12 @@
   </div>
 
   <script>
-  // Visit counter using countapi.xyz (free, no signup)
+  // Simple visit counter using localStorage (per-browser, but works without external API)
   (function() {
-    fetch('https://api.countapi.xyz/hit/demo-omnisense-interseqt/visits')
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        document.getElementById('visit-count').textContent = d.value + (d.value === 1 ? ' visit' : ' visits');
-      })
-      .catch(function() {});
+    var key = 'omnisense_demo_visits';
+    var count = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+    localStorage.setItem(key, count);
+    document.getElementById('visit-count').textContent = count + (count === 1 ? ' visit' : ' visits');
   })();
   </script>
 
