@@ -6,6 +6,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="mockups.css">
 <link rel="stylesheet" href="tour.css">
+<style>
+  @media (max-width: 768px) {
+    /* Drawer — remove fixed width set inline on this file */
+    .drawer { width: 100vw !important; }
+
+    /* Drawer header: name + badges row — allow wrapping */
+    .drawer-header > div > div[style*="display:flex"] {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ECMO decision button row */
+    .card [style*="display:flex; gap:var(--space-sm)"] {
+      flex-wrap: wrap;
+    }
+
+    /* MDT contact rows — stack page button below text on narrow screens */
+    .drawer-body [style*="display:flex; align-items:center; gap:12px"] {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Background grid in main (dimmed patient list) */
+    .main [style*="grid-template-columns:repeat"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
 </head>
 <body>
 <div class="app">

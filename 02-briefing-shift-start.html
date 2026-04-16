@@ -6,6 +6,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="mockups.css">
 <link rel="stylesheet" href="tour.css">
+<style>
+  @media (max-width: 768px) {
+    /* Page-header action buttons row — wrap onto new line, don't overflow */
+    .page-header > div:last-child {
+      flex-wrap: wrap;
+      gap: 6px;
+      width: 100%;
+    }
+    .page-header > div:last-child .btn-sm {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    /* Voice/Text sub-tabs — full width, not fit-content */
+    #briefing-subtabs {
+      width: 100% !important;
+      box-sizing: border-box;
+    }
+    #briefing-subtabs button {
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Audio control row in ai-bubble header — wrap */
+    #audio-control {
+      width: 100%;
+      margin-left: 0 !important;
+    }
+
+    /* I-PASS grid — collapse label/value pair to single column */
+    #briefing-text [style*="grid-template-columns:80px 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
 </head>
 <body>
 <div class="app">

@@ -6,6 +6,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="mockups.css">
 <link rel="stylesheet" href="tour.css">
+<style>
+  @media (max-width: 768px) {
+    /* Drawer — remove fixed width set inline on this file */
+    .drawer { width: 100vw !important; }
+
+    /* Drawer header: name + badges row — allow wrapping */
+    .drawer-header > div > div[style*="display:flex"] {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Hold-medication rows — badge + drug name + note stack */
+    .drawer-body [style*="display:flex; align-items:center; gap:10px"] {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Anaesthesia flags tile grid */
+    .drawer-body [style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Sign-off footer row */
+    .drawer-body > div:last-child {
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+
+    /* Background grid in main (dimmed patient list) */
+    .main [style*="grid-template-columns:repeat"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
 </head>
 <body>
 <div class="app">

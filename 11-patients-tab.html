@@ -112,6 +112,25 @@
     font-size: var(--font-xs);
     font-family: inherit;
   }
+
+  @media (max-width: 768px) {
+    .patients-grid {
+      grid-template-columns: 1fr;
+    }
+    .filter-row {
+      gap: 6px;
+    }
+    .sort-select {
+      margin-left: 0;
+      width: 100%;
+    }
+    .pt-header {
+      flex-wrap: wrap;
+    }
+    .pt-footer {
+      flex-wrap: wrap;
+    }
+  }
 </style>
 </head>
 <body>
