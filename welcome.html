@@ -203,7 +203,20 @@
 
   <div class="welcome-footer">
     OmniSense Clinical by InterseQt &middot; Confidential &middot; Synthetic patient data only
+    <span id="visit-count" style="margin-left:12px; opacity:0.6;"></span>
   </div>
+
+  <script>
+  // Visit counter using countapi.xyz (free, no signup)
+  (function() {
+    fetch('https://api.countapi.xyz/hit/demo-omnisense-interseqt/visits')
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        document.getElementById('visit-count').textContent = d.value + (d.value === 1 ? ' visit' : ' visits');
+      })
+      .catch(function() {});
+  })();
+  </script>
 
 </div>
 
