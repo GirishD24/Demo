@@ -287,21 +287,59 @@
 .tour-bar-next {
   background: #00796B;
   color: white;
-  animation: cta-bounce 1.2s ease-in-out infinite;
   position: relative;
 }
-.tour-bar-next:hover { background: #009688; animation: none; transform: none; }
+.tour-bar-next:hover { background: #009688; }
 
-@keyframes cta-bounce {
-  0%, 100% { transform: scale(1); background: #00796B; box-shadow: none; }
-  50% { transform: scale(1.12); background: #00BFA5; box-shadow: 0 0 12px rgba(0,191,165,0.6); }
+.tour-bar-arrows {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  gap: 0;
 }
+.tour-bar-arrows span {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  color: #00BFA5;
+  animation: chevron-flow 1.2s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(0,191,165,0.6);
+}
+.tour-bar-arrows span:nth-child(1) { animation-delay: 0s; }
+.tour-bar-arrows span:nth-child(2) { animation-delay: 0.2s; }
+.tour-bar-arrows span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes chevron-flow {
+  0%, 100% { opacity: 0.2; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(4px); }
+}
+
+/* Remove floating arrow - replaced by inline animated arrows */
+.tour-bar-arrow { display: none; }
 .tour-bar-disabled {
   opacity: 0.3;
   pointer-events: none;
 }
 
 body.tour-active { padding-bottom: 52px; }
+
+.tour-page-end {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  margin-top: var(--space-xl);
+  background: var(--color-primary-bg);
+  border: 1px solid #B2DFDB;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #004D40;
+  font-weight: 500;
+}
+.tour-page-end svg {
+  flex-shrink: 0;
+}
 
 /* ============ MOBILE RESPONSIVE ============ */
 

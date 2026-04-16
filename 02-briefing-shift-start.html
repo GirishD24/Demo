@@ -29,8 +29,8 @@
       <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
       Briefing
     </div>
-    <div class="tab">Rounds</div>
     <div class="tab">Patients</div>
+    <div class="tab">Rounds</div>
     <div class="tab">Knowledge</div>
   </nav>
 
@@ -49,6 +49,15 @@
         </button>
       </div>
     </div>
+
+    <!-- Voice / Text sub-tabs -->
+    <div id="briefing-subtabs" style="display:flex; gap:4px; margin-bottom:var(--space-md); background:var(--color-bg); padding:4px; border-radius:var(--radius-md); width:fit-content;">
+      <button id="subtab-voice" onclick="showBriefingView('voice')" style="padding:8px 20px; border:none; border-radius:var(--radius-sm); font-size:var(--font-sm); font-weight:600; cursor:pointer; font-family:inherit; background:var(--color-primary); color:white;">Voice</button>
+      <button id="subtab-text" onclick="showBriefingView('text')" style="padding:8px 20px; border:none; border-radius:var(--radius-sm); font-size:var(--font-sm); font-weight:600; cursor:pointer; font-family:inherit; background:transparent; color:var(--color-text-secondary);">Text (I-PASS)</button>
+    </div>
+
+    <!-- VOICE VIEW -->
+    <div id="briefing-voice">
 
     <!-- Doctor's voice turn -->
     <div class="doctor-bubble">
@@ -111,14 +120,13 @@
       </div>
     </div>
 
-    <!-- Text handoff (collapsible) -->
-    <div id="handoff-toggle" style="margin-top:var(--space-md);">
-      <button onclick="document.getElementById('handoff-body').style.display = document.getElementById('handoff-body').style.display === 'none' ? 'block' : 'none'; this.querySelector('.toggle-arrow').textContent = document.getElementById('handoff-body').style.display === 'none' ? '\u25B6' : '\u25BC';" style="display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); cursor:pointer; font-size:var(--font-sm); font-weight:600; color:var(--color-text-secondary); font-family:inherit; width:100%; text-align:left;">
-        <span class="toggle-arrow">&#9660;</span>
-        View as text (I-PASS handoff from Dr. Anand)
-      </button>
-      <div id="handoff-body" style="display:block; margin-top:8px; padding:var(--space-lg); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm); line-height:1.7;">
-        <div style="display:grid; grid-template-columns:80px 1fr; gap:var(--space-sm) var(--space-lg); margin-bottom:var(--space-md);">
+    </div><!-- end briefing-voice -->
+
+    <!-- TEXT VIEW (I-PASS) -->
+    <div id="briefing-text" style="display:none;">
+      <div style="padding:var(--space-lg); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); font-size:var(--font-sm); line-height:1.7;">
+        <div style="font-size:var(--font-xs); text-transform:uppercase; letter-spacing:0.8px; color:var(--color-primary); font-weight:700; margin-bottom:var(--space-md);">I-PASS Handoff from Dr. Anand &middot; 11 April 2026 &middot; 07:00</div>
+        <div style="display:grid; grid-template-columns:80px 1fr; gap:var(--space-sm) var(--space-lg);">
           <div style="font-size:var(--font-xs); text-transform:uppercase; color:var(--color-text-muted); font-weight:700; letter-spacing:0.8px;">Illness</div>
           <div><span class="badge badge-critical">Watcher x1</span> <span class="badge badge-warning" style="margin-left:4px;">Unstable x3</span> <span class="badge badge-stable" style="margin-left:4px;">Stable x7</span></div>
 
@@ -140,6 +148,17 @@
         </div>
       </div>
     </div>
+
+    <script>
+    function showBriefingView(view) {
+      document.getElementById('briefing-voice').style.display = view === 'voice' ? 'block' : 'none';
+      document.getElementById('briefing-text').style.display = view === 'text' ? 'block' : 'none';
+      document.getElementById('subtab-voice').style.background = view === 'voice' ? 'var(--color-primary)' : 'transparent';
+      document.getElementById('subtab-voice').style.color = view === 'voice' ? 'white' : 'var(--color-text-secondary)';
+      document.getElementById('subtab-text').style.background = view === 'text' ? 'var(--color-primary)' : 'transparent';
+      document.getElementById('subtab-text').style.color = view === 'text' ? 'white' : 'var(--color-text-secondary)';
+    }
+    </script>
 
     <script>
     var isSpeaking = false;
@@ -534,6 +553,9 @@
   </main>
 </div>
 <script>
+// Scroll to top before tour starts (heavy page with expanded I-PASS)
+window.scrollTo(0, 0);
+
 var TOUR_CONFIG = {
   pageDesc: 'After asking "How does my day look?" you hear and see the full shift briefing.'
 };
@@ -551,10 +573,12 @@ var TOUR_STEPS = [
     position: 'right'
   },
   {
-    target: '#handoff-toggle',
-    title: 'Text view',
-    body: 'Prefer reading? Expand this to see the same briefing as a structured I-PASS handoff document.',
-    position: 'bottom'
+    target: '#briefing-subtabs',
+    title: 'Voice or text',
+    body: 'Switch between the <strong>Voice</strong> briefing (what you just heard) and the <strong>Text</strong> view (structured I-PASS handoff). Same data, different format.',
+    position: 'bottom',
+    onEnter: function() { showBriefingView('text'); },
+    onLeave: function() { showBriefingView('voice'); }
   },
   {
     target: '.action-summary',

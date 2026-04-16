@@ -29,8 +29,8 @@
       <svg class="tab-mic-icon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
       Briefing
     </div>
-    <div class="tab">Rounds</div>
     <div class="tab">Patients</div>
+    <div class="tab">Rounds</div>
     <div class="tab">Knowledge</div>
   </nav>
 
@@ -135,7 +135,19 @@ var TOUR_STEPS = [
   {
     target: '.tabbar',
     title: 'Your tabs',
-    body: '<strong>Briefing</strong> is where you start your shift, using voice or text. <strong>Rounds</strong> tracks which patients you have seen and what actions are pending. <strong>Patients</strong> shows your full patient list with clinical details, journey timeline, and body views. <strong>Knowledge</strong> is your clinical reference library.',
+    body: '<strong>Briefing</strong> is where you start your shift, using voice or text. <strong>Patients</strong> shows your full patient list with clinical details, journey timeline, and body views. <strong>Rounds</strong> tracks which patients you have seen and what actions are pending. <strong>Knowledge</strong> is your clinical reference library.',
+    position: 'bottom'
+  },
+  {
+    target: '.page-title',
+    title: 'Your shift at a glance',
+    body: 'OmniSense greets you by name, shows the date, who handed over to you, and how many patients are on your list today.',
+    position: 'bottom'
+  },
+  {
+    target: '#triage-counts',
+    title: 'How busy is your morning?',
+    body: '<strong>5 patients need attention</strong>, 6 are stable overnight. You know the shape of your shift before you say a word.',
     position: 'bottom'
   },
   {
@@ -151,18 +163,6 @@ var TOUR_STEPS = [
     position: 'right',
     onEnter: function() { document.getElementById('voice-overlay-demo').style.display = 'flex'; },
     onLeave: function() { document.getElementById('voice-overlay-demo').style.display = 'none'; }
-  },
-  {
-    target: '.page-title',
-    title: 'Your shift at a glance',
-    body: 'You see your name, the date, who handed over to you, and how many patients are on your list today.',
-    position: 'bottom'
-  },
-  {
-    target: '#triage-counts',
-    title: 'How busy is your morning?',
-    body: '<strong>5 patients need attention</strong>, 6 are stable overnight. You know the shape of your shift before you say a word.',
-    position: 'top'
   },
   {
     target: '#sample-prompts',

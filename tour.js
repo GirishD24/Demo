@@ -101,6 +101,7 @@
       '<div class="tour-bar-nav">' +
         '<button class="tour-bar-btn tour-bar-prev' + (prevUrl ? '' : ' tour-bar-disabled') + '" id="tb-prev">\u2190 Prev</button>' +
         '<button class="tour-bar-btn tour-bar-next" id="tb-next">' + (nextUrl ? 'Next \u2192' : 'Done') + '</button>' +
+      (nextUrl ? '<span class="tour-bar-arrows"><span>\u203A</span><span>\u203A</span><span>\u203A</span></span>' : '') +
       '</div>';
 
     // Start disabled — enabled after spotlight tour finishes
@@ -108,6 +109,12 @@
     bar.style.pointerEvents = 'none';
 
     document.body.appendChild(bar);
+
+    // Bouncing arrow pointing at Next button
+    var arrow = document.createElement('div');
+    arrow.className = 'tour-bar-arrow';
+    arrow.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg><svg viewBox="0 0 24 24" style="margin-top:-12px; opacity:0.5;"><path d="M12 16l-6-6h12z"/></svg>';
+    document.body.appendChild(arrow);
     document.getElementById('tb-prev').addEventListener('click', function () { if (prevUrl) location.href = prevUrl; });
     document.getElementById('tb-next').addEventListener('click', function () { location.href = nextUrl || 'index.html'; });
 
@@ -259,6 +266,7 @@
     if (steps[currentStep] && steps[currentStep].onLeave) steps[currentStep].onLeave();
     if (ring) ring.style.display = 'none';
     if (tooltip) tooltip.style.display = 'none';
+
     // Enable the bottom nav bar
     var bar = document.querySelector('.tour-bar');
     if (bar) {
@@ -295,6 +303,13 @@
 
   // ===== INIT =====
   function init() {
+    // Append nav hint to the last spotlight step's body (except on the last page)
+    var idx = getPageIndex();
+    var isLastPage = idx >= PAGE_MAP.length - 1;
+    if (!isLastPage && typeof TOUR_STEPS !== 'undefined' && TOUR_STEPS.length > 0) {
+      var last = TOUR_STEPS[TOUR_STEPS.length - 1];
+      last.body += '<br><br><span style="color:#FFB300;">Tap <strong>Next \u2192</strong> in the footer bar to continue to the next screen.</span>';
+    }
     buildNavBar();
     // Small delay so page renders first
     setTimeout(startSpotlightTour, 600);
