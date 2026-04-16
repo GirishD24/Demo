@@ -348,23 +348,11 @@ body.tour-active { padding-bottom: 52px; }
   .password-card { padding: 32px 24px; width: 90vw; }
   .password-input { font-size: 14px; }
 
-  /* Spotlight tooltip — bottom sheet on mobile */
-  .spotlight-tooltip {
-    position: fixed !important;
-    bottom: 52px !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: auto !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    border-radius: 12px 12px 0 0;
-    padding: 14px 16px;
-    box-sizing: border-box;
-  }
-  .spotlight-tooltip::before { display: none; }
+  /* Spotlight tooltip */
+  .spotlight-tooltip { max-width: 260px; padding: 14px; }
   .spotlight-tooltip-step { width: 22px; height: 22px; font-size: 11px; }
-  .spotlight-tooltip-title { font-size: 13px; }
-  .spotlight-tooltip-body { font-size: 12px; }
+  .spotlight-tooltip-title { font-size: 12px; }
+  .spotlight-tooltip-body { font-size: 11px; }
   .spotlight-tooltip-nav { margin-top: 10px; padding-top: 8px; }
   .spot-btn { padding: 5px 12px; font-size: 11px; }
 
